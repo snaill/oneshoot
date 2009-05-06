@@ -41,7 +41,9 @@
   <ItemGroup>
     <Compile Include="IService.cs" />
     <Compile Include="ITweet.cs" />
+    <Compile Include="ITweetCollection.cs" />
     <Compile Include="IUser.cs" />
+    <Compile Include="IUserCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -3,7 +3,7 @@
     <Configuration Condition="'$(Configuration)'==''">Debug</Configuration>
     <DefaultClrNameSpace>OneShoot</DefaultClrNameSpace>
     <AssemblyName>OneShoot</AssemblyName>
-    <RootNamespace>OneShoot.UI</RootNamespace>
+    <RootNamespace>OneShoot</RootNamespace>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <ApplicationVersion>1.0.0.*</ApplicationVersion>
     <ApplicationRevision>0</ApplicationRevision>
@@ -12,7 +12,8 @@
     <ProjectGuid>{48C3551D-E2F5-453A-893A-B57F8745DD7E}</ProjectGuid>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <OutputType>WinExe</OutputType>
-    <ApplicationIcon>OneShoot.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
@@ -22,6 +23,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
     <ApplicationDefinition Include="App.xaml">
@@ -38,6 +40,8 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Misc\Account.cs" />
+    <Compile Include="Misc\AccountManager.cs" />
     <Compile Include="TweetControl.xaml.cs">
       <DependentUpon>TweetControl.xaml</DependentUpon>
     </Compile>
@@ -63,12 +67,9 @@
     <Resource Include="Resource\Accounts.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Twitter\Twitter.csproj">
-      <Project>{4EA55B8D-131E-41D1-8025-5E0CAF4867A6}</Project>
-      <Name>Twitter</Name>
+    <ProjectReference Include="..\Addin\Addin.csproj">
+      <Project>{A0A18315-AE7E-4244-8293-503636781248}</Project>
+      <Name>Addin</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="OneShoot.ico" />
   </ItemGroup>
 </Project>
