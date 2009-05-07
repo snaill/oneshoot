@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Twitter")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Sursen")]
+[assembly: AssemblyCompany("Snail Studio")]
 [assembly: AssemblyProduct("Twitter")]
-[assembly: AssemblyCopyright("Copyright © Sursen 2009")]
+[assembly: AssemblyCopyright("Copyright © Snail Studio 2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

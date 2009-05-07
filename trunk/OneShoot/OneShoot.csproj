@@ -72,4 +72,8 @@
       <Name>Addin</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="OneShoot.addin" />
+    <Resource Include="Configure.xml" />
+  </ItemGroup>
 </Project>

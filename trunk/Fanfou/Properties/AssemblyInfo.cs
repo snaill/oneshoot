@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Addin")]
+[assembly: AssemblyTitle("Fanfou")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Snail Studio")]
-[assembly: AssemblyProduct("Addin")]
+[assembly: AssemblyProduct("Fanfou")]
 [assembly: AssemblyCopyright("Copyright © Snail Studio 2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("3dcf5650-552b-45a5-9cda-0b20c5a4149a")]
+[assembly: Guid("c6a0532e-27fd-4ae8-8d15-e35acc3390f7")]
 
 // Version information for an assembly consists of the following four values:
 //

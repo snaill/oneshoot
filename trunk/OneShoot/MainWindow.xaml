@@ -4,18 +4,38 @@
 	x:Class="OneShoot.MainWindow"
 	x:Name="Window"
 	Title="Window"
-	Width="350" Height="550" WindowStyle="None" WindowStartupLocation="CenterScreen" MinWidth="350" MinHeight="100" AllowsTransparency="True" xmlns:OneShoot="clr-namespace:OneShoot" Icon="Resource\OneShoot.ico">
+	Width="350" Height="550" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen" MinWidth="350" MinHeight="100" xmlns:OneShoot="clr-namespace:OneShoot" Icon="Resource\OneShoot.ico" Loaded="Window_Loaded">
+	<Window.Resources>
+	</Window.Resources>
+	<Window.Triggers>
+	</Window.Triggers>
 
 	<Grid x:Name="LayoutRoot">
-		<DockPanel Width="Auto" Height="Auto">
+		<DockPanel Width="Auto" Height="Auto" x:Name="TweetPanel">
+			<DockPanel Height="64" Width="Auto" DockPanel.Dock="Top">
+				<DockPanel.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF545454" Offset="0"/>
+						<GradientStop Color="#FFA9A5A5" Offset="1"/>
+						<GradientStop Color="#FFC8C8C8" Offset="0.545"/>
+					</LinearGradientBrush>
+				</DockPanel.Background>
+				<Button Width="Auto" Height="Auto" Margin="5,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Center" x:Name="AccountButton" Click="AccountButton_Click">
+					<Image Width="Auto" Height="Auto" Source="Resource\Accounts.ico" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+				</Button>
+				<Button Width="Auto" Height="Auto" DockPanel.Dock="Right" Margin="0,0,5,0" VerticalAlignment="Center" x:Name="NewButton">
+					<Image Width="Auto" Height="Auto" Source="Resource\New.ico" Stretch="None"/>
+				</Button>
+				<Label Width="Auto" Height="Auto" Content="Label" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="AccountLabel"/>
+			</DockPanel>
 			<UniformGrid Height="Auto" Rows="1" Width="Auto" DockPanel.Dock="Bottom">
-				<Button Width="Auto" Height="Auto">
+				<Button Width="Auto" Height="Auto" x:Name="TweetButton">
 					<Image HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Height="Auto" Source="Resource\Tweets.ico" Stretch="None"/>
 				</Button>
-				<Button Width="Auto" Height="Auto">
+				<Button Width="Auto" Height="Auto" x:Name="MentionButton">
 					<Image HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Height="Auto" Source="Resource\Mentions.ico" Stretch="None"/>
 				</Button>
-				<Button Width="Auto" Height="Auto">
+				<Button Width="Auto" Height="Auto" x:Name="MessageButton">
 					<Image HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Height="Auto" Source="Resource\Messages.ico" Stretch="None"/>
 				</Button>
 				<Button>
@@ -24,6 +44,6 @@
 			</UniformGrid>
 			<OneShoot:TweetControl Width="Auto" Height="Auto" DockPanel.Dock="Bottom"/>
 		</DockPanel>
-		<OneShoot:AccountControl HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Hidden"/>
+		<OneShoot:AccountControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed" x:Name="AccountPanel"/>
 	</Grid>
 </Window>

@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4EA55B8D-131E-41D1-8025-5E0CAF4867A6}</ProjectGuid>
+    <ProjectGuid>{BA40B0CD-CA71-475D-8702-A1701C9CA0BD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OneShoot.Addin.Twitter</RootNamespace>
-    <AssemblyName>Twitter</AssemblyName>
+    <RootNamespace>OneShoot.Addin.Fanfou</RootNamespace>
+    <AssemblyName>Fanfou</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
