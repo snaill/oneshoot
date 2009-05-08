@@ -6,7 +6,16 @@
 	mc:Ignorable="d"
 	x:Class="OneShoot.AccountControl"
 	x:Name="UserControl"
-	d:DesignWidth="640" d:DesignHeight="480">
+	d:DesignWidth="640" d:DesignHeight="480" xmlns:OneShoot="clr-namespace:OneShoot">
+
+	<UserControl.Resources>
+		<ObjectDataProvider x:Key="AccountDS" d:IsDataSource="True" ObjectType="{x:Type OneShoot:Account}"/>
+		<DataTemplate x:Key="AccountListItemTemplate">
+			<StackPanel>
+				<Label Content="{Binding Path=Name}"/>
+			</StackPanel>
+		</DataTemplate>
+	</UserControl.Resources>
 
 	<DockPanel x:Name="LayoutRoot">
 			<DockPanel DockPanel.Dock="Top" Height="64">
@@ -25,7 +34,7 @@
 			</Button>
 			<Label Width="Auto" Height="Auto" Content="Label" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 		</DockPanel>
-			<ListBox IsSynchronizedWithCurrentItem="True"/>
+			<ListBox IsSynchronizedWithCurrentItem="True" x:Name="AccountListBox" ItemsSource="{Binding Mode=OneWay, Source={StaticResource AccountDS}}" ItemTemplate="{DynamicResource AccountListItemTemplate}"/>
 
 	</DockPanel>
 	

@@ -21,6 +21,13 @@ namespace OneShoot
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            //
+            Manager.Init();
+
+            //
+            AccountPanel.AccountListBox.ItemsSource = Manager.Accounts;
+
+            //
             TweetPanel.Visibility = Visibility.Hidden;
             AccountPanel.Visibility = Visibility.Visible;
         }
