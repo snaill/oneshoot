@@ -25,6 +25,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="WindowsBase" />
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -37,11 +40,10 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Code\Manager.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Misc\Account.cs" />
-    <Compile Include="Misc\AccountManager.cs" />
     <Compile Include="TweetControl.xaml.cs">
       <DependentUpon>TweetControl.xaml</DependentUpon>
     </Compile>
@@ -73,7 +75,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="OneShoot.addin" />
-    <Resource Include="Configure.xml" />
+    <Content Include="Data\OneShoot.addin" />
   </ItemGroup>
 </Project>
