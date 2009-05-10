@@ -4,13 +4,20 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d"
+	xmlns:OneShoot="clr-namespace:OneShoot"
 	x:Class="OneShoot.AccountControl"
 	x:Name="UserControl"
-	d:DesignWidth="640" d:DesignHeight="480" xmlns:OneShoot="clr-namespace:OneShoot">
+	d:DesignWidth="640" d:DesignHeight="480">
 
 	<UserControl.Resources>
-		<ObjectDataProvider x:Key="AccountDS" d:IsDataSource="True" ObjectType="{x:Type OneShoot:Account}"/>
+		<ObjectDataProvider x:Key="AccountDS" d:IsDataSource="True" ObjectType="{x:Type OneShoot:AccountInfo}"/>
 		<DataTemplate x:Key="AccountListItemTemplate">
+			<StackPanel>
+				<Label Content="{Binding Path=UserName}"/>
+			</StackPanel>
+		</DataTemplate>
+		<ObjectDataProvider x:Key="AddinInfoDS" d:IsDataSource="True" ObjectType="{x:Type OneShoot:AddinInfo}"/>
+		<DataTemplate x:Key="AddinInfoTemplate">
 			<StackPanel>
 				<Label Content="{Binding Path=Name}"/>
 			</StackPanel>
@@ -26,16 +33,25 @@
 					<GradientStop Color="#FFC8C8C8" Offset="0.545"/>
 				</LinearGradientBrush>
 			</DockPanel.Background>
-			<Button Width="Auto" Height="Auto" Margin="5,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+			<Button Width="Auto" Height="Auto" Margin="5,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Center" x:Name="EditButton" Click="EditButton_Click">
 				<Image Width="Auto" Height="Auto" Source="Resource\Edit.ico" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 			</Button>
-			<Button Width="Auto" Height="Auto" DockPanel.Dock="Right" Margin="0,0,5,0" VerticalAlignment="Center">
+			<Button Width="Auto" Height="Auto" DockPanel.Dock="Right" Margin="0,0,5,0" VerticalAlignment="Center" x:Name="NewButon" Click="NewButon_Click">
 				<Image Width="Auto" Height="Auto" Source="Resource\New.ico" Stretch="None"/>
 			</Button>
-			<Label Width="Auto" Height="Auto" Content="Label" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+			<Label Width="Auto" Height="Auto" Content="Accounts" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 		</DockPanel>
-			<ListBox IsSynchronizedWithCurrentItem="True" x:Name="AccountListBox" ItemsSource="{Binding Mode=OneWay, Source={StaticResource AccountDS}}" ItemTemplate="{DynamicResource AccountListItemTemplate}"/>
-
+			<UniformGrid x:Name="NewGridLayout" Width="Auto" Height="Auto" Rows="4" Columns="2" Visibility="Collapsed" DockPanel.Dock="Top">
+				<Label Height="Auto" Content="UserName" Width="Auto"/>
+				<TextBox Height="Auto" Text="" Width="Auto"/>
+				<Label Height="Auto" Content="Password" Width="Auto"/>
+				<PasswordBox Height="Auto" Width="Auto"/>
+				<Label Height="Auto" Content="Type" Width="Auto"/>
+				<ComboBox IsSynchronizedWithCurrentItem="True" Height="Auto" IsReadOnly="True" Width="Auto" ItemTemplate="{DynamicResource AddinInfoTemplate}" ItemsSource="{Binding Mode=OneWay, Source={StaticResource AddinInfoDS}}" x:Name="TypeComboBox"/>
+				<Button Width="Auto" Height="Auto" Content="Create" x:Name="CreateButton" HorizontalAlignment="Right" Click="CreateButton_Click"/>
+				<Button Width="Auto" Height="Auto" Content="Cancel" x:Name="CancelButton" HorizontalAlignment="Left" Click="CancelButton_Click"/>
+			</UniformGrid>
+			<ListBox IsSynchronizedWithCurrentItem="True" x:Name="AccountListBox" ItemsSource="{Binding Mode=OneWay, Source={StaticResource AccountDS}}" ItemTemplate="{DynamicResource AccountListItemTemplate}" DockPanel.Dock="Bottom" MouseLeftButtonUp="AccountListBox_MouseLeftButtonUp"/>
 	</DockPanel>
 	
 </UserControl>

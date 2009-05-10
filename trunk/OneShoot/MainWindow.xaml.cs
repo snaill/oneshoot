@@ -23,6 +23,7 @@ namespace OneShoot
         {
             //
             Manager.Init();
+            Manager.Main = this;
 
             //
             AccountPanel.AccountListBox.ItemsSource = Manager.Accounts;
