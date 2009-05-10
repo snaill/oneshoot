@@ -18,5 +18,32 @@ namespace OneShoot
 
 			// 在此点之下插入创建对象所需的代码。
 		}
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void NewButon_Click(object sender, RoutedEventArgs e)
+        {
+           TypeComboBox.ItemsSource = Manager.Addins;
+           NewGridLayout.Visibility = Visibility.Visible;
+        }
+
+        private void CreateButton_Click(object sender, RoutedEventArgs e)
+        {
+            NewGridLayout.Visibility = Visibility.Collapsed;
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            NewGridLayout.Visibility = Visibility.Collapsed;
+        }
+
+        private void AccountListBox_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Manager.Main.TweetPanel.Visibility = Visibility.Visible;
+            Manager.Main.AccountPanel.Visibility = Visibility.Hidden;
+        }
 	}
 }
