@@ -43,9 +43,9 @@
 		</DockPanel>
 			<UniformGrid x:Name="NewGridLayout" Width="Auto" Height="Auto" Rows="4" Columns="2" Visibility="Collapsed" DockPanel.Dock="Top">
 				<Label Height="Auto" Content="UserName" Width="Auto"/>
-				<TextBox Height="Auto" Text="" Width="Auto"/>
+				<TextBox Height="Auto" Text="" Width="Auto" x:Name="UserNameTextBox"/>
 				<Label Height="Auto" Content="Password" Width="Auto"/>
-				<PasswordBox Height="Auto" Width="Auto"/>
+				<PasswordBox Height="Auto" Width="Auto" x:Name="PasswordTextBox"/>
 				<Label Height="Auto" Content="Type" Width="Auto"/>
 				<ComboBox IsSynchronizedWithCurrentItem="True" Height="Auto" IsReadOnly="True" Width="Auto" ItemTemplate="{DynamicResource AddinInfoTemplate}" ItemsSource="{Binding Mode=OneWay, Source={StaticResource AddinInfoDS}}" x:Name="TypeComboBox"/>
 				<Button Width="Auto" Height="Auto" Content="Create" x:Name="CreateButton" HorizontalAlignment="Right" Click="CreateButton_Click"/>

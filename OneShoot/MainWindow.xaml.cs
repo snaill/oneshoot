@@ -26,7 +26,7 @@ namespace OneShoot
             Manager.Main = this;
 
             //
-            AccountPanel.AccountListBox.ItemsSource = Manager.Accounts;
+            AccountPanel.AccountListBox.ItemsSource = Manager.AccountMgr.Accounts;
 
             //
             TweetPanel.Visibility = Visibility.Hidden;
