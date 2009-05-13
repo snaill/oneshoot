@@ -26,12 +26,18 @@ namespace OneShoot
 
         private void NewButon_Click(object sender, RoutedEventArgs e)
         {
-           TypeComboBox.ItemsSource = Manager.Addins;
+           TypeComboBox.ItemsSource = Manager.AddinMgr.Addins;
            NewGridLayout.Visibility = Visibility.Visible;
         }
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
+            AccountInfo acc = new AccountInfo();
+            acc.UserName = UserNameTextBox.Text;
+            acc.Password = PasswordTextBox.Password;
+            acc.Type = TypeComboBox.SelectedItem.ToString();
+            Manager.AccountMgr.Add(acc);
+
             NewGridLayout.Visibility = Visibility.Collapsed;
         }
 
