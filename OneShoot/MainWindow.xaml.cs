@@ -26,7 +26,7 @@ namespace OneShoot
             Manager.Main = this;
 
             //
-            AccountPanel.AccountListBox.ItemsSource = Manager.AccountMgr.Accounts;
+            // AccountPanel.AccountListBox.ItemsSource = Manager.AccountMgr.Accounts;
 
             //
             TweetPanel.Visibility = Visibility.Hidden;
@@ -38,5 +38,36 @@ namespace OneShoot
             TweetPanel.Visibility = Visibility.Hidden;
             AccountPanel.Visibility = Visibility.Visible;
         }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void NewButon_Click(object sender, RoutedEventArgs e)
+        {
+            TypeComboBox.ItemsSource = Manager.AddinMgr.Addins;
+            NewGridLayout.Visibility = Visibility.Visible;
+        }
+        private void CreateButton_Click(object sender, RoutedEventArgs e)
+        {
+            AccountInfo acc = new AccountInfo();
+            acc.UserName = UserNameTextBox.Text;
+            acc.Password = PasswordTextBox.Password;
+            acc.Type = TypeComboBox.SelectedItem.ToString();
+            Manager.AccountMgr.Add(acc);
+
+            NewGridLayout.Visibility = Visibility.Collapsed;
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            NewGridLayout.Visibility = Visibility.Collapsed;
+        }
+        private void AccountListBox_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Manager.Main.TweetPanel.Visibility = Visibility.Visible;
+            Manager.Main.AccountPanel.Visibility = Visibility.Hidden;
+        }
+
 	}
 }
