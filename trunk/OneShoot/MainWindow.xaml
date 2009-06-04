@@ -14,9 +14,10 @@
 		</DataTemplate>
 		<ObjectDataProvider x:Key="AddinInfoDS" d:IsDataSource="True" ObjectType="{x:Type OneShoot:AddinInfo}"/>
 		<DataTemplate x:Key="AccountListItemTemplate">
-			<StackPanel>
+			<DockPanel>
+                <Image DockPanel.Dock="Left" Source="Resource\Recycle.ico"/>
 				<Label Content="{Binding Path=UserName}"/>
-			</StackPanel>
+			</DockPanel>
 		</DataTemplate>
 		<ObjectDataProvider x:Key="AccountDS" d:IsDataSource="True" ObjectType="{x:Type OneShoot:AccountInfo}"/>
 	</Window.Resources>
@@ -29,11 +30,11 @@
 					<GradientStop Color="#FFC8C8C8" Offset="0.545"/>
 				</LinearGradientBrush>
 			</DockPanel.Background>
-			<Button Width="Auto" Height="Auto" DockPanel.Dock="Left" Margin="0,0,5,0" VerticalAlignment="Center" x:Name="NewButton">
+			<Button Width="Auto" Height="Auto" DockPanel.Dock="Left" Margin="0,0,5,0" VerticalAlignment="Center" x:Name="NewButton" Click="NewButon_Click">
 				<Image Width="Auto" Height="Auto" Source="Resource\New.ico" Stretch="None"/>
 			</Button>
 			<Button Width="Auto" Height="Auto" Margin="5,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Center" x:Name="AccountButton" Click="AccountButton_Click" DockPanel.Dock="Right">
-				<Image Width="Auto" Height="Auto" Source="Resource\Accounts.ico" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+				<Image Width="Auto" Height="Auto" Source="Resource\Recycle.ico" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 			</Button>
 			<Label Width="Auto" Height="Auto" Content="Label" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="AccountLabel"/>
 		</DockPanel>
@@ -47,7 +48,7 @@
 			<Button Width="Auto" Height="Auto" Content="Create" x:Name="CreateButton" HorizontalAlignment="Right" Click="CreateButton_Click"/>
 			<Button Width="Auto" Height="Auto" Content="Cancel" x:Name="CancelButton" HorizontalAlignment="Left" Click="CancelButton_Click"/>
 		</UniformGrid>
-		<TabControl IsSynchronizedWithCurrentItem="True" Width="Auto" Height="Auto" DockPanel.Dock="Bottom" TabStripPlacement="Bottom">
+		<TabControl x:Name="Tabs" IsSynchronizedWithCurrentItem="True" Width="Auto" Height="Auto" DockPanel.Dock="Bottom" TabStripPlacement="Bottom">
 			<TabItem Header="Tweet">
 				<ListBox IsSynchronizedWithCurrentItem="True" Width="0" Height="0"/>
 			</TabItem>
@@ -57,10 +58,9 @@
 			<TabItem Header="User">
 				<Grid/>
 			</TabItem>
-			<TabItem Header="Account">
-
+			<TabItem x:Name="AccountTab" Header="Account">
 				<DockPanel x:Name="AccountPanel" Width="Auto" Height="Auto">
-					<ListBox IsSynchronizedWithCurrentItem="True" x:Name="AccountListBox" ItemsSource="{Binding Mode=OneWay, Source={StaticResource AccountDS}}" ItemTemplate="{DynamicResource AccountListItemTemplate}" DockPanel.Dock="Bottom" MouseLeftButtonUp="AccountListBox_MouseLeftButtonUp"/>
+					<ListBox IsSynchronizedWithCurrentItem="True" x:Name="AccountListBox" ItemsSource="{Binding Mode=OneWay, Source={StaticResource AccountDS}}" ItemTemplate="{DynamicResource AccountListItemTemplate}" DockPanel.Dock="Bottom"/>
 				</DockPanel>
 	
 			</TabItem>

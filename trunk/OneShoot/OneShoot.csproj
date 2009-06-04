@@ -83,5 +83,6 @@
     <Content Include="OneShoot.addin">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Resource\Recycle.ico" />
   </ItemGroup>
 </Project>

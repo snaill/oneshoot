@@ -23,20 +23,18 @@ namespace OneShoot
         {
             //
             Manager.Init();
-            Manager.Main = this;
 
-            //
-            // AccountPanel.AccountListBox.ItemsSource = Manager.AccountMgr.Accounts;
+            if ( Manager.AccountMgr.Accounts.Count == 0 )
+                Tabs.SelectedItem = AccountTab;
+            else
+                AccountListBox.ItemsSource = Manager.AccountMgr.Accounts;
 
-            //
-            TweetPanel.Visibility = Visibility.Hidden;
-            AccountPanel.Visibility = Visibility.Visible;
         }
 
         private void AccountButton_Click(object sender, RoutedEventArgs e)
         {
-            TweetPanel.Visibility = Visibility.Hidden;
-            AccountPanel.Visibility = Visibility.Visible;
+//            TweetPanel.Visibility = Visibility.Hidden;
+//            AccountPanel.Visibility = Visibility.Visible;
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
@@ -62,11 +60,6 @@ namespace OneShoot
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             NewGridLayout.Visibility = Visibility.Collapsed;
-        }
-        private void AccountListBox_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            Manager.Main.TweetPanel.Visibility = Visibility.Visible;
-            Manager.Main.AccountPanel.Visibility = Visibility.Hidden;
         }
 
 	}
