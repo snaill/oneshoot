@@ -48,8 +48,8 @@ namespace OneShoot
 
         private void AccountListBox_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            Manager.Main.TweetPanel.Visibility = Visibility.Visible;
-            Manager.Main.AccountPanel.Visibility = Visibility.Hidden;
+//            Manager.Main.TweetPanel.Visibility = Visibility.Visible;
+//            Manager.Main.AccountPanel.Visibility = Visibility.Hidden;
         }
 	}
 }
