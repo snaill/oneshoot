@@ -5,37 +5,49 @@ using System.Text;
 
 namespace OneShoot.Addin
 {
+    public enum Timeline
+    {
+        Friends,
+        Public,
+        Replies
+    };
+
     public interface IService
     {
-        ITweet AddTweet(string text);
-        ITweet AddTweet(string text, double replyid);
-        void DestroyTweet(double id);
+        string UserName { get; set; }
+        string Password { get; set; }
 
-        ITweet SendDirectMessage(string text, string user);
-        void DestroyDirectMessage(double id);
+        ITweetCollection GetTimeline( Timeline tl, string userId, string since, int max );
 
-        void FollowUser(string userName);
+        //ITweet AddTweet(string text);
+        //ITweet AddTweet(string text, double replyid);
+        //void DestroyTweet(double id);
 
-        IUserCollection GetFriends(int userId);
-        IUserCollection GetFriends();
-        IUser GetUser(int userId);
+        //ITweet SendDirectMessage(string text, string user);
+        //void DestroyDirectMessage(double id);
 
-        IUser CurrentlyLoggedInUser { get; set; }
-        System.Security.SecureString Password { get; set; }
-        IUser Login();
+        //void FollowUser(string userName);
 
-        ITweetCollection GetFriendsTimeline();
-        ITweetCollection GetFriendsTimeline(string since, string userId);
-        ITweetCollection GetFriendsTimeline(string since);
-        ITweetCollection GetPublicTimeline(string since);
-        ITweetCollection GetPublicTimeline();
-        ITweetCollection GetReplies();
-        ITweetCollection GetReplies(string since);
+        //IUserCollection GetFriends(int userId);
+        //IUserCollection GetFriends();
+        //IUser GetUser(int userId);
 
-        ITweetCollection GetUserTimeline(string userId);
+        //IUser CurrentlyLoggedInUser { get; set; }
+        //System.Security.SecureString Password { get; set; }
+        //IUser Login();
 
-        ITweetCollection RetrieveMessages();
-        ITweetCollection RetrieveMessages(string since);
+        //ITweetCollection GetFriendsTimeline();
+        //ITweetCollection GetFriendsTimeline(string since, string userId);
+        //ITweetCollection GetFriendsTimeline(string since);
+        //ITweetCollection GetPublicTimeline(string since);
+        //ITweetCollection GetPublicTimeline();
+        //ITweetCollection GetReplies();
+        //ITweetCollection GetReplies(string since);
+
+        //ITweetCollection GetUserTimeline(string userId);
+
+        //ITweetCollection RetrieveMessages();
+        //ITweetCollection RetrieveMessages(string since);
 
         System.Net.IWebProxy WebProxy { get; set; }
     }

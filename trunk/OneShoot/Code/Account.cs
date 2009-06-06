@@ -9,10 +9,27 @@ namespace OneShoot
 {
     public class AccountInfo
     {
+        protected IService service = null;
+
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Type { get; set; }
-        public IService Service { get; set; }
+        public IService Service 
+        { 
+            get {
+                if (service == null)
+                {
+                    service =  Manager.AddinMgr.CreateService(Type);
+                    if (null != service)
+                    {
+                        service.UserName = UserName;
+                        service.Password = Password;
+                    }
+                }
+
+                return service;
+            }
+        }
     }
 
     public class AccountManager
