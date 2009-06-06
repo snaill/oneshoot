@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Addins>
-  <Addin name="Twitter" type="OneShoot.Addin.Twitter.Service, Twitter" />
-  <Addin name="饭否" type="OneShoot.Addin.Fanfou.Service, Fanfou" />
+  <Addin name="Twitter" assembly="Twitter.dll" type="OneShoot.Addin.Twitter.Service" />
+  <Addin name="饭否" assembly="Fanfou.dll" type="OneShoot.Addin.Fanfou.Service" />
 </Addins>

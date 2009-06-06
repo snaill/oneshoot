@@ -40,7 +40,11 @@ namespace OneShoot
 
             for (int i = 0; i < AccountMgr.Accounts.Count; i++)
             {
+                OneShoot.Addin.IService service = AccountMgr.Accounts[i].Service;
+                if ( null == service )
+                    continue;
 
+                OneShoot.Addin.ITweetCollection tc = service.GetTimeline(OneShoot.Addin.Timeline.Friends, null, null, 100);
             }
             time.Start();
         }

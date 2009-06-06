@@ -28,13 +28,11 @@ namespace OneShoot
                 Tabs.SelectedItem = AccountTab;
             else
                 AccountListBox.ItemsSource = Manager.AccountMgr.Accounts;
-
         }
 
-        private void AccountButton_Click(object sender, RoutedEventArgs e)
+        private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
-//            TweetPanel.Visibility = Visibility.Hidden;
-//            AccountPanel.Visibility = Visibility.Visible;
+            Manager.Refresh();
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
@@ -51,7 +49,7 @@ namespace OneShoot
             AccountInfo acc = new AccountInfo();
             acc.UserName = UserNameTextBox.Text;
             acc.Password = PasswordTextBox.Password;
-            acc.Type = TypeComboBox.SelectedItem.ToString();
+            acc.Type = ((AddinInfo)TypeComboBox.SelectedItem).Name;
             Manager.AccountMgr.Add(acc);
 
             NewGridLayout.Visibility = Visibility.Collapsed;
