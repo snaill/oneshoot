@@ -44,7 +44,7 @@ namespace OneShoot
                 if ( null == service )
                     continue;
 
-                OneShoot.Addin.ITweetCollection tc = service.GetTimeline(OneShoot.Addin.Timeline.Friends, null, null, 100);
+                OneShoot.Addin.ITweetCollection tc = service.GetTimeline(OneShoot.Addin.Timeline.Friends, AccountMgr.Accounts[i].UserName, "", 100);
             }
             time.Start();
         }

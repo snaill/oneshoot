@@ -24,10 +24,13 @@ namespace OneShoot
             //
             Manager.Init();
 
-            if ( Manager.AccountMgr.Accounts.Count == 0 )
+            if (Manager.AccountMgr.Accounts.Count == 0)
                 Tabs.SelectedItem = AccountTab;
             else
+            {
                 AccountListBox.ItemsSource = Manager.AccountMgr.Accounts;
+                Manager.Refresh();
+            }
         }
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)

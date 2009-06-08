@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Net;
+using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.ServiceModel.Web;
@@ -23,7 +25,19 @@ namespace OneShoot.Addin.Fanfou
             {
                 case Timeline.Friends:
                     {
-                        System.IO.Stream stream = GetResponse( "http://api.fanfou.com/statuses/friends_timeline.json" );
+                        string url = string.Format("http://api.fanfou.com/statuses/friends_timeline.json?id={0}&count={1}&since_id={2}&page={3}",
+                            userId, 20, since, 1);
+                        System.IO.Stream stream = GetResponse(url);
+                        DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Tweet[]));
+                        Tweet[] tweet = (Tweet[])serializer.ReadObject(stream);
+
+                    }
+                    break;
+                case Timeline.Public:
+                    {
+                        string url = string.Format("http://api.fanfou.com/statuses/public_timeline.json?id={0}&count={1}&since_id={2}&page={3}",
+                            userId, 20, since, 1);
+                        System.IO.Stream stream = GetResponse(url);
                         DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Tweet[]));
                         Tweet[] tweet = (Tweet[])serializer.ReadObject(stream);
 
@@ -37,11 +51,22 @@ namespace OneShoot.Addin.Fanfou
 
         protected System.IO.Stream GetResponse(string url)
         {
-            System.Net.WebRequest req = System.Net.WebRequest.Create(url);
-            req.Credentials = new System.Net.NetworkCredential(UserName, Password);
-            req.Method = "POST";
-            req.Proxy = WebProxy;
-            return req.GetRequestStream();
+            try
+            {
+                System.Net.WebRequest req = System.Net.WebRequest.Create(url);
+                System.Net.CredentialCache myCache = new System.Net.CredentialCache();
+                myCache.Add(new Uri(url), "Basic", new System.Net.NetworkCredential(UserName, Password));
+                req.Credentials = myCache;
+                req.Method = "GET";
+                req.Proxy = WebProxy;
+
+                System.Net.WebResponse resp = req.GetResponse();
+                return resp.GetResponseStream();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }
