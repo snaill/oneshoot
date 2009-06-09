@@ -4,12 +4,12 @@ using System.Text;
 
 namespace OneShoot.Addin
 {
-    public interface ITweet
+    public class ITweet
     {
-        double Id { get; set; }
-        double ReplyId { get; set; }
-        DateTime? DateCreated { get; set; }
-        string Text { get; set; }
-        IUser User { get; set; }
+        public string Id { get; set; }
+        public string ReplyId { get; set; }
+        public string DateCreated { get; set; }
+        public string Text { get; set; }
+        public IUser User { get; set; }
     }
 }

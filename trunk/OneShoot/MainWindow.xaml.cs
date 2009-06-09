@@ -30,6 +30,7 @@ namespace OneShoot
             {
                 AccountListBox.ItemsSource = Manager.AccountMgr.Accounts;
                 Manager.Refresh();
+                TweetListBox.ItemsSource = Manager.Tweets;
             }
         }
 

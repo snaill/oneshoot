@@ -5,17 +5,17 @@ using System.Text;
 
 namespace OneShoot.Addin
 {
-    public interface IUser
+    public class IUser
     {
-        int Id { get; set; }
-        string Name { get; set; }
-        string SiteUrl { get; set; }
-        string ImageUrl { get; set; }
-        string Description { get; set; }
-        string Location { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string SiteUrl { get; set; }
+        public string ImageUrl { get; set; }
+        public string Description { get; set; }
+        public string Location { get; set; }
 
-        int StatusesCount { get; set; }
-        int FollowersCount { get; set; }
-        int FollowingCount { get; set; }
+        public int StatusesCount { get; set; }
+        public int FollowersCount { get; set; }
+        public int FollowingCount { get; set; }
     }
 }

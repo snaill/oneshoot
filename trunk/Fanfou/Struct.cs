@@ -10,6 +10,13 @@ namespace OneShoot.Addin.Fanfou
     [DataContract(Namespace="http://oneshoot.org")]
     class Tweet //: OneShoot.Addin.ITweet
     {
+        //public override double Id { get{ return double.Parse(id); } }
+        //public override double ReplyId { get { return double.Parse(in_reply_to_status_id); } }
+        //public override DateTime DateCreated { get { return DateTime.Parse(created_at); } }
+        //public override string Text { get { return text; } }
+        //public override IUser User { get { return user; } }
+
+        ////////////////////////////////////////////////////////////////////
         [DataMember(Name = "created_at")]
         public string created_at { get; set; }
 
@@ -42,11 +49,35 @@ namespace OneShoot.Addin.Fanfou
 
         [DataMember(Name = "user")]
         public User user { get; set; }
+
+        public ITweet toITweet()
+        {
+            ITweet tweet = new ITweet();
+            tweet.Id = id;
+            tweet.ReplyId = in_reply_to_status_id;
+            tweet.DateCreated = created_at;
+            tweet.Text = text;
+            tweet.User = user.toIUser();
+
+            return tweet;
+        }
     }
 
     [DataContract(Namespace = "http://oneshoot.org")]
     class User //: OneShoot.Addin.IUser
     {
+        //public override int Id { get { return int.Parse(id); } }
+        //public override string Name { get { return name; } }
+        //public override string SiteUrl { get { return ""; } }
+        //public override string ImageUrl { get { return ""; } }
+        //public override string Description { get { return ""; } }
+        //public override string Location { get { return ""; } }
+
+        //public override int StatusesCount { get { return 0; } }
+        //public override int FollowersCount { get { return 0; } }
+        //public override int FollowingCount { get { return 0; } }
+
+        ////////////////////////////////////////////////////////////////////
         [DataMember(Name = "id")]
         public string id { get; set; }
 
@@ -76,5 +107,13 @@ namespace OneShoot.Addin.Fanfou
 
         [DataMember(Name = "status")]
         public Tweet status { get; set; }
+
+        public IUser toIUser()
+        {
+            IUser user = new IUser();
+            user.Id = id;
+            user.Name = name;
+            return user;
+        }
     }
 }
