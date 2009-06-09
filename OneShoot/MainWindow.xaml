@@ -2,10 +2,11 @@
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:OneShoot="clr-namespace:OneShoot"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
 	x:Class="OneShoot.MainWindow"
 	x:Name="Window"
 	Title="Window"
-	Width="350" Height="550" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen" MinWidth="350" MinHeight="100" Icon="Resource\OneShoot.ico" Loaded="Window_Loaded" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+	Width="350" Height="550" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen" MinWidth="350" MinHeight="100" Icon="Resource\OneShoot.ico" Loaded="Window_Loaded" xmlns:OneShoot_Addin="clr-namespace:OneShoot.Addin;assembly=OneShoot.Addin">
 	<Window.Resources>
 		<DataTemplate x:Key="AddinInfoTemplate">
 			<StackPanel>
@@ -20,7 +21,14 @@
 			</DockPanel>
 		</DataTemplate>
 		<ObjectDataProvider x:Key="AccountDS" d:IsDataSource="True" ObjectType="{x:Type OneShoot:AccountInfo}"/>
-	</Window.Resources>
+        <DataTemplate x:Key="TweetListItemTemplate">
+            <DockPanel>
+                <Image DockPanel.Dock="Left" Source="Resource\Recycle.ico"/>
+                <Label Content="{Binding Path=Text}"/>
+            </DockPanel>
+        </DataTemplate>
+        <ObjectDataProvider x:Key="TweetDS" d:IsDataSource="True" ObjectType="{x:Type OneShoot_Addin:ITweet}"/>
+    </Window.Resources>
 	<DockPanel x:Name="LayoutRoot">
 		<DockPanel Height="Auto" Width="Auto" DockPanel.Dock="Top">
 			<DockPanel.Background>
@@ -50,7 +58,7 @@
 		</UniformGrid>
 		<TabControl x:Name="Tabs" IsSynchronizedWithCurrentItem="True" Width="Auto" Height="Auto" DockPanel.Dock="Bottom" TabStripPlacement="Bottom">
 			<TabItem Header="Tweet">
-				<ListBox IsSynchronizedWithCurrentItem="True" Width="0" Height="0"/>
+				<ListBox IsSynchronizedWithCurrentItem="True" x:Name="TweetListBox" ItemsSource="{Binding Mode=OneWay, Source={StaticResource TweetDS}}" ItemTemplate="{DynamicResource TweetListItemTemplate}" DockPanel.Dock="Bottom"/>
 			</TabItem>
 			<TabItem Header="Reply">
 				<Grid/>

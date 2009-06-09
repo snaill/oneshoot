@@ -15,7 +15,7 @@ namespace OneShoot
         public const string AddinFile = "OneShoot.addin";
 
         static System.Windows.Threading.DispatcherTimer time = null;
-
+        public static OneShoot.Addin.TweetCollection Tweets = null;
 
         public static void Init()
         {
@@ -44,7 +44,7 @@ namespace OneShoot
                 if ( null == service )
                     continue;
 
-                OneShoot.Addin.ITweetCollection tc = service.GetTimeline(OneShoot.Addin.Timeline.Friends, AccountMgr.Accounts[i].UserName, "", 100);
+                 Tweets = service.GetTimeline(OneShoot.Addin.Timeline.Friends, AccountMgr.Accounts[i].UserName, "", 100);
             }
             time.Start();
         }

@@ -16,40 +16,53 @@ namespace OneShoot.Addin.Fanfou
     /// </summary>
     public class Service : OneShoot.Addin.IService
     {
+        public System.Net.IWebProxy WebProxy { get; set; }
+
         public string UserName { get; set; }
         public string Password { get; set; }
 
-        public ITweetCollection GetTimeline( Timeline tl, string userId, string since, int max )
+        public TweetCollection GetTimeline( Timeline tl, string userId, string since, int max )
         {
+            string url = "";
             switch ( tl )
             {
                 case Timeline.Friends:
                     {
-                        string url = string.Format("http://api.fanfou.com/statuses/friends_timeline.json?id={0}&count={1}&since_id={2}&page={3}",
+                        url = string.Format("http://api.fanfou.com/statuses/friends_timeline.json?id={0}&count={1}&since_id={2}&page={3}",
                             userId, 20, since, 1);
-                        System.IO.Stream stream = GetResponse(url);
-                        DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Tweet[]));
-                        Tweet[] tweet = (Tweet[])serializer.ReadObject(stream);
-
+                    }
+                    break;
+                case Timeline.User:
+                    {
+                        url = string.Format("http://api.fanfou.com/statuses/user_timeline.json?id={0}&count={1}&since_id={2}&page={3}",
+                            userId, 20, since, 1);
                     }
                     break;
                 case Timeline.Public:
                     {
-                        string url = string.Format("http://api.fanfou.com/statuses/public_timeline.json?id={0}&count={1}&since_id={2}&page={3}",
-                            userId, 20, since, 1);
-                        System.IO.Stream stream = GetResponse(url);
-                        DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Tweet[]));
-                        Tweet[] tweet = (Tweet[])serializer.ReadObject(stream);
-
+                        url = string.Format("http://api.fanfou.com/statuses/public_timeline.json?count={0}", 20 );
+                    }
+                    break;
+                case Timeline.Replies:
+                    {
+                        url = string.Format("http://api.fanfou.com/statuses/replies.json?count={1}&since_id={2}&page={3}",
+                            20, since, 1);
                     }
                     break;
             }
-            return null;
+            Tweet[] tweets = GetResponse<Tweet[]>(url);
+            TweetCollection tc = new TweetCollection();
+            for (int i = 0; i < tweets.Length; i++)
+                tc.Add(tweets[i].toITweet());
+            return tc;
         }
 
-        public System.Net.IWebProxy WebProxy { get; set; }
-
-        protected System.IO.Stream GetResponse(string url)
+        /// <summary>
+        /// 获取
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        protected T GetResponse<T>(string url)
         {
             try
             {
@@ -61,7 +74,9 @@ namespace OneShoot.Addin.Fanfou
                 req.Proxy = WebProxy;
 
                 System.Net.WebResponse resp = req.GetResponse();
-                return resp.GetResponseStream();
+                System.IO.Stream stream = resp.GetResponseStream();
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(T));
+                return (T)serializer.ReadObject(stream);
             }
             catch (Exception ex)
             {
