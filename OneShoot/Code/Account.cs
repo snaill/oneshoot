@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
+using System.Collections.Specialized;
+using System.Collections.ObjectModel;
 using OneShoot.Addin;
 
 namespace OneShoot
@@ -32,10 +34,8 @@ namespace OneShoot
         }
     }
 
-    public class AccountManager
+    public class AccountManager : ObservableCollection<AccountInfo>
     {
-        public List<AccountInfo> Accounts = new List<AccountInfo>();
-
         public void Init()
         {
             try
@@ -49,8 +49,8 @@ namespace OneShoot
                                Type = acc.Attribute("type").Value
                            };
 
-                if (null != accs)
-                    Accounts.AddRange(accs);
+                //if (null != accs)
+                //    AddRange(accs);
 
             }
             catch (Exception)
@@ -59,12 +59,12 @@ namespace OneShoot
             }
         }
 
-        public void Add(AccountInfo acc)
+        public new void Add(AccountInfo acc)
         {
             // auth
             
             // add
-            Accounts.Add(acc);
+            base.Add(acc);
 
             // save
             XDocument xml = XDocument.Load( Manager.AccountFile );
@@ -75,12 +75,16 @@ namespace OneShoot
                 new XAttribute("type", acc.Type));
             xml.Root.Add( accElem );
             xml.Save( Manager.AccountFile );
+
+            //
+  //          if (CollectionChanged != null)
+                //CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add));
         }
 
-        public void Remove(AccountInfo acc)
+        public new void Remove(AccountInfo acc)
         {
             // remove
-            Accounts.Remove(acc);
+            base.Remove(acc);
 
             // save
             XDocument xml = XDocument.Load( Manager.AccountFile );
@@ -91,6 +95,10 @@ namespace OneShoot
 
             // 保存xml
             xml.Save(Manager.AccountFile);
+
+            //
+        //    if (CollectionChanged != null)
+           //     CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove));
         }
     }
 }

@@ -14,10 +14,8 @@ namespace OneShoot
         public string Type { get; set; }
     }
 
-    public class AddinManager
+    public class AddinManager : List<AddinInfo>
     {
-        public List<AddinInfo> Addins = new List<AddinInfo>();
-
         public void Init()
         {
             try
@@ -32,7 +30,7 @@ namespace OneShoot
                            };
 
                 if (null != accs)
-                    Addins.AddRange(accs);
+                    AddRange(accs);
 
             }
             catch (Exception)
@@ -43,13 +41,20 @@ namespace OneShoot
 
         public IService CreateService(string name)
         {
-            for (int i = 0; i < Addins.Count; i++)
+            for (int i = 0; i < Count; i++)
             {
-                if (Addins[i].Name == name)
+                if (this[i].Name == name)
                 {
-                    System.Reflection.Assembly ass = System.Reflection.Assembly.LoadFile(System.Environment.CurrentDirectory + "\\" + Addins[i].Assembly);
-                    Type t = ass.GetType(Addins[i].Type);
-                    return (IService)System.Activator.CreateInstance(t);
+                    try
+                    {
+                        System.Reflection.Assembly ass = System.Reflection.Assembly.LoadFile(System.Environment.CurrentDirectory + "\\" + this[i].Assembly);
+                        Type t = ass.GetType(this[i].Type);
+                        return (IService)System.Activator.CreateInstance(t);
+                    }
+                    catch (Exception)
+                    {
+                        continue;
+                    }
                 }
             }
 
