@@ -20,7 +20,7 @@
 				<Label Content="{Binding Path=UserName}"/>
 			</DockPanel>
 		</DataTemplate>
-		<ObjectDataProvider x:Key="AccountDS" d:IsDataSource="True" ObjectType="{x:Type OneShoot:AccountInfo}"/>
+		<ObjectDataProvider x:Key="AccountDS" d:IsDataSource="True" ObjectType="{x:Type OneShoot:AccountManager}"/>
         <DataTemplate x:Key="TweetListItemTemplate">
             <DockPanel>
                 <Image DockPanel.Dock="Left" Source="Resource\Recycle.ico"/>

@@ -38,13 +38,13 @@ namespace OneShoot
         {
             time.Stop();
 
-            for (int i = 0; i < AccountMgr.Accounts.Count; i++)
+            for (int i = 0; i < AccountMgr.Count; i++)
             {
-                OneShoot.Addin.IService service = AccountMgr.Accounts[i].Service;
+                OneShoot.Addin.IService service = AccountMgr[i].Service;
                 if ( null == service )
                     continue;
 
-                 Tweets = service.GetTimeline(OneShoot.Addin.Timeline.Friends, AccountMgr.Accounts[i].UserName, "", 100);
+                 Tweets = service.GetTimeline(OneShoot.Addin.Timeline.Friends, AccountMgr[i].UserName, "", 100);
             }
             time.Start();
         }

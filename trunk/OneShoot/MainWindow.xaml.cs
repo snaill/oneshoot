@@ -24,11 +24,11 @@ namespace OneShoot
             //
             Manager.Init();
 
-            if (Manager.AccountMgr.Accounts.Count == 0)
+            if (Manager.AccountMgr.Count == 0)
                 Tabs.SelectedItem = AccountTab;
             else
             {
-                AccountListBox.ItemsSource = Manager.AccountMgr.Accounts;
+                AccountListBox.ItemsSource = Manager.AccountMgr;
                 Manager.Refresh();
                 TweetListBox.ItemsSource = Manager.Tweets;
             }
@@ -45,7 +45,7 @@ namespace OneShoot
         }
         private void NewButon_Click(object sender, RoutedEventArgs e)
         {
-            TypeComboBox.ItemsSource = Manager.AddinMgr.Addins;
+            TypeComboBox.ItemsSource = Manager.AddinMgr;
             NewGridLayout.Visibility = Visibility.Visible;
         }
         private void CreateButton_Click(object sender, RoutedEventArgs e)
@@ -54,7 +54,8 @@ namespace OneShoot
             acc.UserName = UserNameTextBox.Text;
             acc.Password = PasswordTextBox.Password;
             acc.Type = ((AddinInfo)TypeComboBox.SelectedItem).Name;
-            Manager.AccountMgr.Add(acc);
+      //      Manager.AccountMgr.Add(acc);
+            ((AccountManager)AccountListBox.ItemsSource).Add(acc);
 
             NewGridLayout.Visibility = Visibility.Collapsed;
         }
