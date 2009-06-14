@@ -45,6 +45,18 @@ namespace OneShoot
             {
                 if (this[i].Name == name)
                 {
+<<<<<<< .mine
+                    try
+                    {
+                        System.Reflection.Assembly ass = System.Reflection.Assembly.LoadFile(System.Environment.CurrentDirectory + "\\" + Addins[i].Assembly);
+                        Type t = ass.GetType(Addins[i].Type);
+                        return (IService)System.Activator.CreateInstance(t);
+                    }
+                    catch (Exception)
+                    {
+                        break;
+                    }
+=======
                     try
                     {
                         System.Reflection.Assembly ass = System.Reflection.Assembly.LoadFile(System.Environment.CurrentDirectory + "\\" + this[i].Assembly);
@@ -55,6 +67,7 @@ namespace OneShoot
                     {
                         continue;
                     }
+>>>>>>> .r22
                 }
             }
 
