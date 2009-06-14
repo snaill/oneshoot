@@ -65,5 +65,26 @@ namespace OneShoot
             NewGridLayout.Visibility = Visibility.Collapsed;
         }
 
+        private void TitleBar_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
+                this.DragMove();
+        }
+
+        private void TitleBar_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (e.ClickCount > 1)
+            {
+                if (this.WindowState == WindowState.Normal)
+                {
+                    this.WindowState = WindowState.Maximized;
+                }
+                else
+                {
+                    this.WindowState = WindowState.Normal;
+                }
+            }
+        }
+
 	}
 }
