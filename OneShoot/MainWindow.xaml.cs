@@ -12,6 +12,8 @@ namespace OneShoot
 {
     public partial class MainWindow
 	{
+        System.Windows.Forms.NotifyIcon notifyIcon;
+
 		public MainWindow()
 		{
 			this.InitializeComponent();
@@ -86,5 +88,22 @@ namespace OneShoot
             }
         }
 
+        private void TitleBar_MouseRightButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon();
+            this.notifyIcon.Click += new EventHandler(notifyIcon_Click);
+            this.notifyIcon.BalloonTipText = "One shoot still running.";
+            this.notifyIcon.Text = "One shoot still running.";
+            this.notifyIcon.Icon = new System.Drawing.Icon("Resource/OneShoot.ico");
+            this.notifyIcon.Visible = true;
+            this.Hide();
+        }
+
+        void notifyIcon_Click(object sender, EventArgs e)
+        {
+            this.notifyIcon.Dispose();
+            this.notifyIcon = null;
+            this.Show();
+        }
 	}
 }
