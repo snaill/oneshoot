@@ -8,7 +8,8 @@ namespace OneShoot.Addin
     {
         public string Id { get; set; }
         public string ReplyId { get; set; }
-        public string DateCreated { get; set; }
+        public DateTime DateCreated { get; set; }
+        public string Source { get; set; }
         public string Text { get; set; }
         public IUser User { get; set; }
     }
