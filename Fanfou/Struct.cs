@@ -4,17 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
+using System.Globalization;
 
 namespace OneShoot.Addin.Fanfou
 {
     [DataContract(Namespace="http://oneshoot.org")]
-    class Tweet //: OneShoot.Addin.ITweet
+    class Tweet
     {
-        //public override double Id { get{ return double.Parse(id); } }
-        //public override double ReplyId { get { return double.Parse(in_reply_to_status_id); } }
-        //public override DateTime DateCreated { get { return DateTime.Parse(created_at); } }
-        //public override string Text { get { return text; } }
-        //public override IUser User { get { return user; } }
 
         ////////////////////////////////////////////////////////////////////
         [DataMember(Name = "created_at")]
@@ -55,7 +51,12 @@ namespace OneShoot.Addin.Fanfou
             ITweet tweet = new ITweet();
             tweet.Id = id;
             tweet.ReplyId = in_reply_to_status_id;
-            tweet.DateCreated = created_at;
+            // Sat Jun 13 10:42:57 +0000 2009
+            tweet.DateCreated = DateTime.ParseExact(
+                        created_at,
+                        "ddd MMM dd HH:mm:ss zzzz yyyy",
+                        CultureInfo.GetCultureInfoByIetfLanguageTag("en-us"), DateTimeStyles.AllowWhiteSpaces);
+            tweet.Source = source;
             tweet.Text = text;
             tweet.User = user.toIUser();
 
@@ -64,18 +65,8 @@ namespace OneShoot.Addin.Fanfou
     }
 
     [DataContract(Namespace = "http://oneshoot.org")]
-    class User //: OneShoot.Addin.IUser
+    class User
     {
-        //public override int Id { get { return int.Parse(id); } }
-        //public override string Name { get { return name; } }
-        //public override string SiteUrl { get { return ""; } }
-        //public override string ImageUrl { get { return ""; } }
-        //public override string Description { get { return ""; } }
-        //public override string Location { get { return ""; } }
-
-        //public override int StatusesCount { get { return 0; } }
-        //public override int FollowersCount { get { return 0; } }
-        //public override int FollowingCount { get { return 0; } }
 
         ////////////////////////////////////////////////////////////////////
         [DataMember(Name = "id")]
@@ -113,6 +104,7 @@ namespace OneShoot.Addin.Fanfou
             IUser user = new IUser();
             user.Id = id;
             user.Name = name;
+            user.ScreenName = screen_name;
             return user;
         }
     }
