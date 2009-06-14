@@ -22,10 +22,29 @@
 		</DataTemplate>
 		<ObjectDataProvider x:Key="AccountDS" d:IsDataSource="True" ObjectType="{x:Type OneShoot:AccountManager}"/>
         <DataTemplate x:Key="TweetListItemTemplate">
-            <DockPanel>
-                <Image DockPanel.Dock="Left" Source="Resource\Recycle.ico"/>
-                <Label Content="{Binding Path=Text}"/>
-            </DockPanel>
+		<Grid Grid.IsSharedSizeScope="False" ShowGridLines="False">
+			<Grid.RowDefinitions>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+       		<Image Source="Resource\Recycle.ico" Stretch="None" Grid.RowSpan="3" VerticalAlignment="Top" HorizontalAlignment="Left" Width="Auto" Height="Auto"/>
+       		<StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
+       			<Label Content="{Binding Path=User.ScreenName}" FontWeight="Bold" FontSize="12" Foreground="#FF000000" d:IsStaticText="True" x:Name="UserName" VerticalAlignment="Bottom"/>
+       			<Label Content="{Binding Path=DateCreated}" FontSize="9" Foreground="#FF808080" FontWeight="Normal" x:Name="Date" VerticalAlignment="Bottom"/>
+       			<Label Content="{Binding Path=Source}" FontSize="9" Foreground="#FF808080" FontWeight="Normal" x:Name="Source" VerticalAlignment="Bottom"/>
+       		</StackPanel>
+       		<TextBlock Text="{Binding Path=Text}" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" d:LayoutOverrides="Height" Grid.Row="1" Grid.Column="1"/>
+       		<StackPanel Orientation="Horizontal" VerticalAlignment="Top" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch">
+       			<Image Source="Resource\Recycle.ico" Width="16" Height="16"/>
+       			<Image Source="Resource\Recycle.ico" Width="16" Height="16"/>
+       			<Image Source="Resource\Recycle.ico" Width="16" Height="16"/>
+       		</StackPanel>
+        	</Grid>
         </DataTemplate>
         <ObjectDataProvider x:Key="TweetDS" d:IsDataSource="True" ObjectType="{x:Type OneShoot_Addin:ITweet}"/>
     </Window.Resources>
@@ -58,7 +77,7 @@
 		</UniformGrid>
 		<TabControl x:Name="Tabs" IsSynchronizedWithCurrentItem="True" Width="Auto" Height="Auto" DockPanel.Dock="Bottom" TabStripPlacement="Bottom">
 			<TabItem Header="Tweet">
-				<ListBox IsSynchronizedWithCurrentItem="True" x:Name="TweetListBox" ItemsSource="{Binding Mode=OneWay, Source={StaticResource TweetDS}}" ItemTemplate="{DynamicResource TweetListItemTemplate}" DockPanel.Dock="Bottom"/>
+				<ListBox IsSynchronizedWithCurrentItem="True" x:Name="TweetListBox" ItemsSource="{Binding Mode=OneWay, Source={StaticResource TweetDS}}" ItemTemplate="{DynamicResource TweetListItemTemplate}" DockPanel.Dock="Bottom" ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
 			</TabItem>
 			<TabItem Header="Reply">
 				<Grid/>
