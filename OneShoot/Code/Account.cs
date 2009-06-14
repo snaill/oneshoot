@@ -34,8 +34,10 @@ namespace OneShoot
         }
     }
 
-    public class AccountManager : ObservableCollection<AccountInfo>
+    public class AccountManager : List<AccountInfo>, INotifyCollectionChanged
     {
+        public virtual event NotifyCollectionChangedEventHandler CollectionChanged;
+
         public void Init()
         {
             try
@@ -49,8 +51,8 @@ namespace OneShoot
                                Type = acc.Attribute("type").Value
                            };
 
-                //if (null != accs)
-                //    AddRange(accs);
+                if (null != accs)
+                    AddRange(accs);
 
             }
             catch (Exception)
@@ -77,8 +79,8 @@ namespace OneShoot
             xml.Save( Manager.AccountFile );
 
             //
-  //          if (CollectionChanged != null)
-                //CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add));
+            if (CollectionChanged != null)
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
         public new void Remove(AccountInfo acc)
@@ -97,8 +99,8 @@ namespace OneShoot
             xml.Save(Manager.AccountFile);
 
             //
-        //    if (CollectionChanged != null)
-           //     CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove));
+            if (CollectionChanged != null)
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
     }
 }
