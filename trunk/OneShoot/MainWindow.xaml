@@ -6,7 +6,7 @@
 	x:Class="OneShoot.MainWindow"
 	x:Name="Window"
 	Title="Window"
-	Width="350" Height="550" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen" MinWidth="350" MinHeight="100" Icon="Resource\OneShoot.ico" Loaded="Window_Loaded" xmlns:OneShoot_Addin="clr-namespace:OneShoot.Addin;assembly=OneShoot.Addin">
+	Width="350" Height="550" WindowStyle="None" WindowStartupLocation="CenterScreen" MinWidth="350" MinHeight="100" Icon="Resource\OneShoot.ico" Loaded="Window_Loaded" xmlns:OneShoot_Addin="clr-namespace:OneShoot.Addin;assembly=OneShoot.Addin" Background="#00FFFFFF" ResizeMode="NoResize" AllowsTransparency="True">
 	<Window.Resources>
 		<DataTemplate x:Key="AddinInfoTemplate">
 			<StackPanel>
@@ -49,7 +49,7 @@
         <ObjectDataProvider x:Key="TweetDS" d:IsDataSource="True" ObjectType="{x:Type OneShoot_Addin:ITweet}"/>
     </Window.Resources>
 	<DockPanel x:Name="LayoutRoot">
-		<DockPanel Height="Auto" Width="Auto" DockPanel.Dock="Top">
+		<DockPanel Height="Auto" Width="Auto" DockPanel.Dock="Top" x:Name="TitleBar" MouseMove="TitleBar_MouseMove" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
 			<DockPanel.Background>
 				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 					<GradientStop Color="#FF545454" Offset="0"/>
@@ -57,13 +57,13 @@
 					<GradientStop Color="#FFC8C8C8" Offset="0.545"/>
 				</LinearGradientBrush>
 			</DockPanel.Background>
-			<Button Width="Auto" Height="Auto" DockPanel.Dock="Left" Margin="0,0,5,0" VerticalAlignment="Center" x:Name="NewButton" Click="NewButon_Click">
+			<Button Width="Auto" Height="Auto" DockPanel.Dock="Left" Margin="5,5,5,5" VerticalAlignment="Center" x:Name="NewButton" Click="NewButon_Click">
 				<Image Width="Auto" Height="Auto" Source="Resource\New.ico" Stretch="None"/>
 			</Button>
-			<Button Width="Auto" Height="Auto" Margin="5,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Center" x:Name="RefreshButton" Click="RefreshButton_Click" DockPanel.Dock="Right">
+			<Button Width="Auto" Height="Auto" Margin="5,5,5,5" HorizontalAlignment="Stretch" VerticalAlignment="Center" x:Name="RefreshButton" Click="RefreshButton_Click" DockPanel.Dock="Right">
 				<Image Width="Auto" Height="Auto" Source="Resource\Recycle.ico" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 			</Button>
-			<Label Width="Auto" Height="Auto" Content="Label" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="AccountLabel"/>
+			<Label Width="Auto" Height="Auto" Content="One Shoot" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 		</DockPanel>
 		<UniformGrid x:Name="NewGridLayout" Width="Auto" Height="Auto" Rows="4" Columns="2" Visibility="Collapsed" DockPanel.Dock="Top">
 			<Label Height="Auto" Content="UserName" Width="Auto"/>
@@ -76,14 +76,8 @@
 			<Button Width="Auto" Height="Auto" Content="Cancel" x:Name="CancelButton" HorizontalAlignment="Left" Click="CancelButton_Click"/>
 		</UniformGrid>
 		<TabControl x:Name="Tabs" IsSynchronizedWithCurrentItem="True" Width="Auto" Height="Auto" DockPanel.Dock="Bottom" TabStripPlacement="Bottom">
-			<TabItem Header="Tweet">
+			<TabItem Header="Home" x:Name="HomeTab">
 				<ListBox IsSynchronizedWithCurrentItem="True" x:Name="TweetListBox" ItemsSource="{Binding Mode=OneWay, Source={StaticResource TweetDS}}" ItemTemplate="{DynamicResource TweetListItemTemplate}" DockPanel.Dock="Bottom" ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
-			</TabItem>
-			<TabItem Header="Reply">
-				<Grid/>
-			</TabItem>
-			<TabItem Header="User">
-				<Grid/>
 			</TabItem>
 			<TabItem x:Name="AccountTab" Header="Account">
 				<DockPanel x:Name="AccountPanel" Width="Auto" Height="Auto">
