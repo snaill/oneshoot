@@ -13,14 +13,24 @@
 				<Label Content="{Binding Path=Name}"/>
 			</StackPanel>
 		</DataTemplate>
-		<ObjectDataProvider x:Key="AddinInfoDS" d:IsDataSource="True" ObjectType="{x:Type OneShoot:AddinInfo}"/>
 		<DataTemplate x:Key="AccountListItemTemplate">
 			<DockPanel>
                 <Image DockPanel.Dock="Left" Source="Resource\Recycle.ico"/>
 				<Label Content="{Binding Path=UserName}"/>
 			</DockPanel>
 		</DataTemplate>
-		<ObjectDataProvider x:Key="AccountDS" d:IsDataSource="True" ObjectType="{x:Type OneShoot:AccountManager}"/>
+        <DataTemplate x:Key="AccountNewTemplate">
+            <UniformGrid x:Name="NewGridLayout" Width="Auto" Height="Auto" Rows="4" Columns="2" Visibility="Collapsed" DockPanel.Dock="Top">
+                <Label Height="Auto" Content="UserName" Width="Auto"/>
+                <TextBox Height="Auto" Text="" Width="Auto" x:Name="UserNameTextBox"/>
+                <Label Height="Auto" Content="Password" Width="Auto"/>
+                <PasswordBox Height="Auto" Width="Auto" x:Name="PasswordTextBox"/>
+                <Label Height="Auto" Content="Type" Width="Auto"/>
+                <ComboBox IsSynchronizedWithCurrentItem="True" Height="Auto" IsReadOnly="True" Width="Auto" ItemTemplate="{DynamicResource AddinInfoTemplate}" ItemsSource="{Binding Mode=OneWay}" x:Name="TypeComboBox"/>
+                <Button Width="Auto" Height="Auto" Content="Create" x:Name="CreateButton" HorizontalAlignment="Right" Click="CreateButton_Click"/>
+                <Button Width="Auto" Height="Auto" Content="Cancel" x:Name="CancelButton" HorizontalAlignment="Left" Click="CancelButton_Click"/>
+            </UniformGrid>
+        </DataTemplate>
         <DataTemplate x:Key="TweetListItemTemplate">
 		<Grid Grid.IsSharedSizeScope="False" ShowGridLines="False">
 			<Grid.RowDefinitions>
@@ -46,10 +56,10 @@
        		</StackPanel>
         	</Grid>
         </DataTemplate>
-        <ObjectDataProvider x:Key="TweetDS" d:IsDataSource="True" ObjectType="{x:Type OneShoot_Addin:ITweet}"/>
+        <ObjectDataProvider x:Key="AccountInfoDS" d:IsDataSource="True" ObjectType="{x:Type OneShoot:AccountInfo}"/>
     </Window.Resources>
 	<DockPanel x:Name="LayoutRoot">
-		<DockPanel Height="Auto" Width="Auto" DockPanel.Dock="Top" x:Name="TitleBar" MouseMove="TitleBar_MouseMove" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+		<DockPanel Height="Auto" Width="Auto" DockPanel.Dock="Top" x:Name="TitleBar" MouseMove="TitleBar_MouseMove" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown" MouseRightButtonUp="TitleBar_MouseRightButtonUp" KeyUp="TitleBar_KeyUp">
 			<DockPanel.Background>
 				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 					<GradientStop Color="#FF545454" Offset="0"/>
@@ -71,17 +81,18 @@
 			<Label Height="Auto" Content="Password" Width="Auto"/>
 			<PasswordBox Height="Auto" Width="Auto" x:Name="PasswordTextBox"/>
 			<Label Height="Auto" Content="Type" Width="Auto"/>
-			<ComboBox IsSynchronizedWithCurrentItem="True" Height="Auto" IsReadOnly="True" Width="Auto" ItemTemplate="{DynamicResource AddinInfoTemplate}" ItemsSource="{Binding Mode=OneWay, Source={StaticResource AddinInfoDS}}" x:Name="TypeComboBox"/>
+			<ComboBox IsSynchronizedWithCurrentItem="True" Height="Auto" IsReadOnly="True" Width="Auto" ItemTemplate="{DynamicResource AddinInfoTemplate}" ItemsSource="{Binding Mode=OneWay}" x:Name="TypeComboBox"/>
 			<Button Width="Auto" Height="Auto" Content="Create" x:Name="CreateButton" HorizontalAlignment="Right" Click="CreateButton_Click"/>
 			<Button Width="Auto" Height="Auto" Content="Cancel" x:Name="CancelButton" HorizontalAlignment="Left" Click="CancelButton_Click"/>
 		</UniformGrid>
 		<TabControl x:Name="Tabs" IsSynchronizedWithCurrentItem="True" Width="Auto" Height="Auto" DockPanel.Dock="Bottom" TabStripPlacement="Bottom">
 			<TabItem Header="Home" x:Name="HomeTab">
-				<ListBox IsSynchronizedWithCurrentItem="True" x:Name="TweetListBox" ItemsSource="{Binding Mode=OneWay, Source={StaticResource TweetDS}}" ItemTemplate="{DynamicResource TweetListItemTemplate}" DockPanel.Dock="Bottom" ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+				<ListBox IsSynchronizedWithCurrentItem="True" x:Name="TweetListBox" ItemsSource="{Binding Mode=OneWay}" ItemTemplate="{DynamicResource TweetListItemTemplate}" DockPanel.Dock="Bottom" ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
 			</TabItem>
 			<TabItem x:Name="AccountTab" Header="Account">
 				<DockPanel x:Name="AccountPanel" Width="Auto" Height="Auto">
-					<ListBox IsSynchronizedWithCurrentItem="True" x:Name="AccountListBox" ItemsSource="{Binding Mode=OneWay, Source={StaticResource AccountDS}}" ItemTemplate="{DynamicResource AccountListItemTemplate}" DockPanel.Dock="Bottom"/>
+                    
+					<ListBox IsSynchronizedWithCurrentItem="True" x:Name="AccountListBox" ItemsSource="{Binding Mode=OneWay}" ItemTemplate="{DynamicResource AccountListItemTemplate}" DockPanel.Dock="Bottom"/>
 				</DockPanel>
 	
 			</TabItem>
