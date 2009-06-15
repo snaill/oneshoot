@@ -59,7 +59,7 @@
         <ObjectDataProvider x:Key="AccountInfoDS" d:IsDataSource="True" ObjectType="{x:Type OneShoot:AccountInfo}"/>
     </Window.Resources>
 	<DockPanel x:Name="LayoutRoot">
-		<DockPanel Height="Auto" Width="Auto" DockPanel.Dock="Top" x:Name="TitleBar" MouseMove="TitleBar_MouseMove" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown" MouseRightButtonUp="TitleBar_MouseRightButtonUp" KeyUp="TitleBar_KeyUp">
+		<DockPanel Height="Auto" Width="Auto" DockPanel.Dock="Top" x:Name="TitleBar" MouseMove="TitleBar_MouseMove" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown" MouseRightButtonUp="TitleBar_MouseRightButtonUp">
 			<DockPanel.Background>
 				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 					<GradientStop Color="#FF545454" Offset="0"/>
