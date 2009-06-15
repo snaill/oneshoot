@@ -96,5 +96,4 @@
     </Content>
     <Resource Include="Resource\Recycle.ico" />
   </ItemGroup>
-  <Import Project="SubsetFont.targets" />
 </Project>
