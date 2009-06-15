@@ -52,24 +52,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <BlendEmbeddedFont Include="Fonts\segoeui.ttf">
-      <IsSystemFont>True</IsSystemFont>
-    </BlendEmbeddedFont>
-    <BlendEmbeddedFont Include="Fonts\segoeuib.ttf">
-      <IsSystemFont>True</IsSystemFont>
-    </BlendEmbeddedFont>
-    <BlendEmbeddedFont Include="Fonts\segoeuii.ttf">
-      <IsSystemFont>True</IsSystemFont>
-    </BlendEmbeddedFont>
-    <BlendEmbeddedFont Include="Fonts\segoeuil.ttf">
-      <IsSystemFont>True</IsSystemFont>
-    </BlendEmbeddedFont>
-    <BlendEmbeddedFont Include="Fonts\segoeuiz.ttf">
-      <IsSystemFont>True</IsSystemFont>
-    </BlendEmbeddedFont>
-    <BlendEmbeddedFont Include="Fonts\seguisb.ttf">
-      <IsSystemFont>True</IsSystemFont>
-    </BlendEmbeddedFont>
     <Resource Include="Resource\Mentions.ico" />
     <Resource Include="Resource\Tweets.ico" />
     <Content Include="Resource\OneShoot.ico">

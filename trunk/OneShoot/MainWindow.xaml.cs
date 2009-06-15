@@ -25,12 +25,12 @@ namespace OneShoot
         {
             //
             Manager.Init();
+            AccountListBox.ItemsSource = Manager.AccountMgr;
 
             if (Manager.AccountMgr.Count == 0)
                 Tabs.SelectedItem = AccountTab;
             else
             {
-                AccountListBox.ItemsSource = Manager.AccountMgr;
                 Manager.Refresh();
                 TweetListBox.ItemsSource = Manager.Tweets;
             }
@@ -56,8 +56,7 @@ namespace OneShoot
             acc.UserName = UserNameTextBox.Text;
             acc.Password = PasswordTextBox.Password;
             acc.Type = ((AddinInfo)TypeComboBox.SelectedItem).Name;
-      //      Manager.AccountMgr.Add(acc);
-            ((AccountManager)AccountListBox.ItemsSource).Add(acc);
+            (AccountListBox.ItemsSource as AccountManager).Add(acc);
 
             NewGridLayout.Visibility = Visibility.Collapsed;
         }

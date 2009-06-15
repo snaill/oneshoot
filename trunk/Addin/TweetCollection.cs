@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections.Specialized;
+using System.Collections.ObjectModel;
 
 namespace OneShoot.Addin
 {
-    public class TweetCollection : List<ITweet>, INotifyCollectionChanged
+    public class TweetCollection : ObservableCollection<ITweet>
     {
         #region INotifyCollectionChanged Members
         public event NotifyCollectionChangedEventHandler CollectionChanged;
