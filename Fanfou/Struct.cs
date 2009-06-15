@@ -105,6 +105,7 @@ namespace OneShoot.Addin.Fanfou
             user.Id = id;
             user.Name = name;
             user.ScreenName = screen_name;
+            user.ImageUrl = profile_image_url;
             return user;
         }
     }

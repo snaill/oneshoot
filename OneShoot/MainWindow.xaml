@@ -5,7 +5,7 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
 	x:Class="OneShoot.MainWindow"
 	x:Name="Window"
-	Title="Window"
+	Title="One Shoot"
 	Width="350" Height="550" WindowStyle="None" WindowStartupLocation="CenterScreen" MinWidth="350" MinHeight="100" Icon="Resource\OneShoot.ico" Loaded="Window_Loaded" xmlns:OneShoot_Addin="clr-namespace:OneShoot.Addin;assembly=OneShoot.Addin" Background="#00FFFFFF" ResizeMode="NoResize" AllowsTransparency="True">
 	<Window.Resources>
 		<DataTemplate x:Key="AddinInfoTemplate">
@@ -15,7 +15,7 @@
 		</DataTemplate>
 		<DataTemplate x:Key="AccountListItemTemplate">
 			<DockPanel>
-                <Image DockPanel.Dock="Left" Source="Resource\Recycle.ico"/>
+                <Image DockPanel.Dock="Left" Source="http://twitter.com/favicon.ico"/>
 				<Label Content="{Binding Path=UserName}"/>
 			</DockPanel>
 		</DataTemplate>
@@ -42,7 +42,7 @@
 				<ColumnDefinition Width="Auto"/>
 				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
-       		<Image Source="Resource\Recycle.ico" Stretch="None" Grid.RowSpan="3" VerticalAlignment="Top" HorizontalAlignment="Left" Width="Auto" Height="Auto"/>
+       		<Image Width="48" Height="48" Source="{Binding Path=User.ImageUrl}" Stretch="Fill" Grid.RowSpan="3" VerticalAlignment="Top" HorizontalAlignment="Left" />
        		<StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
        			<Label Content="{Binding Path=User.ScreenName}" FontWeight="Bold" FontSize="12" Foreground="#FF000000" d:IsStaticText="True" x:Name="UserName" VerticalAlignment="Bottom"/>
        			<Label Content="{Binding Path=DateCreated}" FontSize="9" Foreground="#FF808080" FontWeight="Normal" x:Name="Date" VerticalAlignment="Bottom"/>
@@ -90,11 +90,10 @@
 				<ListBox IsSynchronizedWithCurrentItem="True" x:Name="TweetListBox" ItemsSource="{Binding Mode=OneWay}" ItemTemplate="{DynamicResource TweetListItemTemplate}" DockPanel.Dock="Bottom" ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
 			</TabItem>
 			<TabItem x:Name="AccountTab" Header="Account">
-				<DockPanel x:Name="AccountPanel" Width="Auto" Height="Auto">
-                    
+				<DockPanel x:Name="AccountPanel">
+					
 					<ListBox IsSynchronizedWithCurrentItem="True" x:Name="AccountListBox" ItemsSource="{Binding Mode=OneWay}" ItemTemplate="{DynamicResource AccountListItemTemplate}" DockPanel.Dock="Bottom"/>
 				</DockPanel>
-	
 			</TabItem>
 		</TabControl>
 	</DockPanel>
