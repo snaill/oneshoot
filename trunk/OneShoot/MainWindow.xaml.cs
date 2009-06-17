@@ -47,8 +47,15 @@ namespace OneShoot
         }
         private void NewButon_Click(object sender, RoutedEventArgs e)
         {
-            TypeComboBox.ItemsSource = Manager.AddinMgr;
-            NewGridLayout.Visibility = Visibility.Visible;
+            if (Tabs.SelectedItem == HomeTab)
+            {
+                NewTweetGridLayout.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                TypeComboBox.ItemsSource = Manager.AddinMgr;
+                NewGridLayout.Visibility = Visibility.Visible;
+            }
         }
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
