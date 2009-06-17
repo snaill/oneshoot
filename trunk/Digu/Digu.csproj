@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4EA55B8D-131E-41D1-8025-5E0CAF4867A6}</ProjectGuid>
+    <ProjectGuid>{9F2F0E84-2233-4D78-9361-1C9DAE7B1A87}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OneShoot.Addin.Twitter</RootNamespace>
-    <AssemblyName>Twitter</AssemblyName>
+    <RootNamespace>OneShoot.Addin.Digu</RootNamespace>
+    <AssemblyName>Digu</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
