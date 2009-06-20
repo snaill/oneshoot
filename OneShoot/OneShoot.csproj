@@ -48,10 +48,18 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TitleBarControl.xaml.cs">
+      <DependentUpon>TitleBarControl.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="TitleBarControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="Resource\close.png" />
     <Resource Include="Resource\Mentions.ico" />
     <Resource Include="Resource\Tweets.ico" />
     <Content Include="Resource\OneShoot.ico">
