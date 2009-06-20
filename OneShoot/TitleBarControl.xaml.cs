@@ -63,12 +63,12 @@ namespace OneShoot
         }
 
 
-        private void Close_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void Close_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             Owner.Close();
         }
 
-        private void Logo_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void Logo_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             System.Diagnostics.Process.Start("http://OneShoot.org");
         }

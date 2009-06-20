@@ -8,34 +8,32 @@
 	x:Name="UserControl"
 	d:DesignWidth="350" d:DesignHeight="48">
 
-	<UserControl.Resources>
-		<Style x:Key="ImageEffect" TargetType="{x:Type Image}"> 
-			<Setter Property="Stretch" Value="None" />
-            <Style.Triggers> 
-            	<Trigger Property="IsMouseOver" Value="true"> 
-					<Setter Property="Image.BitmapEffect">
-						<Setter.Value>
-							<DropShadowBitmapEffect/>
-						</Setter.Value>
-					</Setter>
-            	</Trigger> 
-            </Style.Triggers> 
-		</Style> 
-	</UserControl.Resources>	
-	<DockPanel x:Name="LayoutRoot" MouseMove="OnMouseMove" MouseLeftButtonDown="OnMouseLeftButtonDown" MouseRightButtonUp="OnMouseRightButtonUp">
-				<DockPanel.Background>
-				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-					<GradientStop Color="#FF545454" Offset="0"/>
-					<GradientStop Color="#FFA9A5A5" Offset="1"/>
-					<GradientStop Color="#FFC8C8C8" Offset="0.545"/>
-				</LinearGradientBrush>
-			</DockPanel.Background>
-			<Image Style="{StaticResource ImageEffect}" Source="Resource\OneShoot.ico" x:Name="Logo" MouseLeftButtonUp="Logo_MouseLeftButtonUp">
-
-			</Image>
-			<Label Content="One Shoot" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-			<StackPanel HorizontalAlignment="Right" Margin="0,0,5,0" VerticalAlignment="Center" Orientation="Horizontal" DockPanel.Dock="Right">
-				<Image Style="{StaticResource ImageEffect}" x:Name="Close" Source="Resource\close.png" Stretch="None" MouseLeftButtonUp="Close_MouseLeftButtonUp"/>
-			</StackPanel>
-		</DockPanel>
+    <UserControl.Resources>
+        <Style x:Key="ImageEffect" TargetType="{x:Type Image}">
+            <Setter Property="Stretch" Value="None" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Image.BitmapEffect">
+                        <Setter.Value>
+                            <DropShadowBitmapEffect/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <DockPanel x:Name="LayoutRoot" MouseMove="OnMouseMove" MouseLeftButtonDown="OnMouseLeftButtonDown" MouseRightButtonUp="OnMouseRightButtonUp">
+        <DockPanel.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF545454" Offset="0"/>
+                <GradientStop Color="#FFA9A5A5" Offset="1"/>
+                <GradientStop Color="#FFC8C8C8" Offset="0.545"/>
+            </LinearGradientBrush>
+        </DockPanel.Background>
+        <Image Style="{StaticResource ImageEffect}" Source="Resource\OneShoot.ico" x:Name="Logo" MouseLeftButtonDown="Logo_MouseLeftButtonDown" />
+        <Label Content="One Shoot" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <StackPanel HorizontalAlignment="Right" Margin="0,0,5,0" VerticalAlignment="Center" Orientation="Horizontal" DockPanel.Dock="Right">
+            <Image Style="{StaticResource ImageEffect}" x:Name="Close" Source="Resource\close.png" Stretch="None" MouseLeftButtonDown="Close_MouseLeftButtonDown"/>
+        </StackPanel>
+    </DockPanel>
 </UserControl>
