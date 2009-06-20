@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Addins>
-  <Addin name="Twitter" assembly="Twitter.dll" type="OneShoot.Addin.Twitter.Service" />
-  <Addin name="饭否" assembly="Fanfou.dll" type="OneShoot.Addin.Fanfou.Service" />
+  <Addin name="Twitter" assembly="Twitter.dll" type="OneShoot.Addin.Twitter.Service" icon="http://twitter.com/favicon.ico" />
+  <Addin name="饭否" assembly="Fanfou.dll" type="OneShoot.Addin.Fanfou.Service" icon="http://fanfou.com/favicon.ico" />
 </Addins>

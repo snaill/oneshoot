@@ -16,6 +16,13 @@ namespace OneShoot
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Type { get; set; }
+        public AddinInfo Addin
+        {
+            get
+            {
+                return Manager.AddinMgr.GetAddinInfo(Type);
+            }
+        }
         public IService Service 
         { 
             get {

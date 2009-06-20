@@ -38,6 +38,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AccountControl.xaml.cs">
+      <DependentUpon>AccountControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -51,6 +54,10 @@
     <Compile Include="TitleBarControl.xaml.cs">
       <DependentUpon>TitleBarControl.xaml</DependentUpon>
     </Compile>
+    <Page Include="AccountControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -62,9 +69,9 @@
     <Resource Include="Resource\close.png" />
     <Resource Include="Resource\Mentions.ico" />
     <Resource Include="Resource\Tweets.ico" />
-    <Content Include="Resource\OneShoot.ico">
+    <Resource Include="Resource\OneShoot.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </Resource>
     <Resource Include="Resource\Edit.ico" />
     <Resource Include="Resource\Messages.ico" />
     <Resource Include="Resource\New.ico" />
@@ -84,6 +91,7 @@
     <Content Include="OneShoot.addin">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Resource\bin_closed.png" />
     <Resource Include="Resource\Recycle.ico" />
   </ItemGroup>
 </Project>
