@@ -24,7 +24,6 @@ namespace OneShoot
         {
             //
             Manager.Init();
-            AccountListBox.ItemsSource = Manager.AccountMgr;
 
             if (Manager.AccountMgr.Count == 0)
                 Tabs.SelectedItem = AccountTab;
@@ -38,38 +37,6 @@ namespace OneShoot
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
             Manager.Refresh();
-        }
-
-        private void EditButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void NewButon_Click(object sender, RoutedEventArgs e)
-        {
-            if (Tabs.SelectedItem == HomeTab)
-            {
-                NewTweetGridLayout.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                TypeComboBox.ItemsSource = Manager.AddinMgr;
-                NewGridLayout.Visibility = Visibility.Visible;
-            }
-        }
-        private void CreateButton_Click(object sender, RoutedEventArgs e)
-        {
-            AccountInfo acc = new AccountInfo();
-            acc.UserName = UserNameTextBox.Text;
-            acc.Password = PasswordTextBox.Password;
-            acc.Type = ((AddinInfo)TypeComboBox.SelectedItem).Name;
-            (AccountListBox.ItemsSource as AccountManager).Add(acc);
-
-            NewGridLayout.Visibility = Visibility.Collapsed;
-        }
-
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
-        {
-            NewGridLayout.Visibility = Visibility.Collapsed;
         }
 	}
 }

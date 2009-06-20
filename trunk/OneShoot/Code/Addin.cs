@@ -12,6 +12,7 @@ namespace OneShoot
         public string Name { get; set; }
         public string Assembly { get; set; }
         public string Type { get; set; }
+        public string Icon { get; set; }
     }
 
     public class AddinManager : List<AddinInfo>
@@ -26,7 +27,8 @@ namespace OneShoot
                            {
                                Name = acc.Attribute("name").Value,
                                Assembly = acc.Attribute("assembly").Value,
-                               Type = acc.Attribute("type").Value
+                               Type = acc.Attribute("type").Value,
+                               Icon = acc.Attribute("icon").Value
                            };
 
                 if (null != accs)
@@ -39,23 +41,27 @@ namespace OneShoot
             }
         }
 
-        public IService CreateService(string name)
+        public AddinInfo GetAddinInfo(string name)
         {
             for (int i = 0; i < Count; i++)
             {
                 if (this[i].Name == name)
-                {
-                    try
-                    {
-                        System.Reflection.Assembly ass = System.Reflection.Assembly.LoadFile(System.Environment.CurrentDirectory + "\\" + this[i].Assembly);
-                        Type t = ass.GetType(this[i].Type);
-                        return (IService)System.Activator.CreateInstance(t);
-                    }
-                    catch (Exception)
-                    {
-                        continue;
-                    }
-                }
+                    return this[i];
+            }
+            return null;
+        }
+
+        public IService CreateService(string name)
+        {
+            try
+            {
+                AddinInfo ai = GetAddinInfo(name);
+                System.Reflection.Assembly ass = System.Reflection.Assembly.LoadFile(System.Environment.CurrentDirectory + "\\" + ai.Assembly);
+                Type t = ass.GetType(ai.Type);
+                return (IService)System.Activator.CreateInstance(t);
+            }
+            catch (Exception)
+            {
             }
 
             return null;

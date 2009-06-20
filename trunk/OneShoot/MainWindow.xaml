@@ -6,7 +6,7 @@
 	x:Class="OneShoot.MainWindow"
 	x:Name="Window"
 	Title="One Shoot"
-	Width="350" Height="550" WindowStyle="None" WindowStartupLocation="CenterScreen" MinWidth="350" MinHeight="100" Icon="Resource\OneShoot.ico" Loaded="Window_Loaded" xmlns:OneShoot_Addin="clr-namespace:OneShoot.Addin;assembly=OneShoot.Addin" Background="#00FFFFFF" ResizeMode="NoResize" AllowsTransparency="True">
+	Width="350" Height="550" WindowStyle="None" WindowStartupLocation="CenterScreen" MinWidth="350" MinHeight="100" Icon="Resource\OneShoot.ico" Loaded="Window_Loaded" xmlns:OneShoot_Addin="clr-namespace:OneShoot.Addin;assembly=OneShoot.Addin" ResizeMode="NoResize" AllowsTransparency="True" Background="#00FFFFFF">
 	<Window.Resources>
 		<DataTemplate x:Key="AddinInfoTemplate">
 			<StackPanel>
@@ -62,19 +62,7 @@
 			<TabItem x:Name="UpdateTab" Header="Update" />
 			<TabItem x:Name="RefreshTab" Header="Refresh" />
 			<TabItem x:Name="AccountTab" Header="Account">
-				<DockPanel x:Name="AccountPanel">
-					<UniformGrid x:Name="NewGridLayout" Width="Auto" Height="Auto" Rows="4" Columns="2" Visibility="Collapsed" DockPanel.Dock="Top">
-						<Label Height="Auto" Content="UserName" Width="Auto"/>
-						<TextBox Height="Auto" Text="" Width="Auto" x:Name="UserNameTextBox"/>
-						<Label Height="Auto" Content="Password" Width="Auto"/>
-						<PasswordBox Height="Auto" Width="Auto" x:Name="PasswordTextBox"/>
-						<Label Height="Auto" Content="Type" Width="Auto"/>
-						<ComboBox IsSynchronizedWithCurrentItem="True" Height="Auto" IsReadOnly="True" Width="Auto" ItemTemplate="{DynamicResource AddinInfoTemplate}" ItemsSource="{Binding Mode=OneWay}" x:Name="TypeComboBox"/>
-						<Button Width="Auto" Height="Auto" Content="Create" x:Name="CreateButton" HorizontalAlignment="Right" Click="CreateButton_Click"/>
-						<Button Width="Auto" Height="Auto" Content="Cancel" x:Name="CancelButton" HorizontalAlignment="Left" Click="CancelButton_Click"/>
-					</UniformGrid>
-					<ListBox IsSynchronizedWithCurrentItem="True" x:Name="AccountListBox" ItemsSource="{Binding Mode=OneWay}" ItemTemplate="{DynamicResource AccountListItemTemplate}" DockPanel.Dock="Bottom"/>
-				</DockPanel>
+				<OneShoot:AccountControl/>
 			</TabItem>
 		</TabControl>
 	</DockPanel>
