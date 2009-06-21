@@ -17,7 +17,7 @@
 		<DataTemplate x:Key="AccountListItemTemplate">
 			<DockPanel>
 				<Image DockPanel.Dock="Left" Source="{Binding Path=Addin.Icon}"/>
-                <Image DockPanel.Dock="Right" Source="Resource\bin_closed.png" HorizontalAlignment="Right" Stretch="None" MouseLeftButtonDown="Delete_MouseLeftButtonDown" x:Name="Delete" Margin="0,0,5,0" ToolTip="Delete account"/>
+                <Image DockPanel.Dock="Right" Source="Resource\bin_closed.png" HorizontalAlignment="Right" Stretch="None" MouseLeftButtonDown="Delete_MouseLeftButtonDown" x:Name="Delete" Margin="0,0,5,0" ToolTip="Delete"/>
                 <Label Content="{Binding Path=UserName}"/>
             </DockPanel>
 		</DataTemplate>
@@ -39,8 +39,8 @@
 				<ComboBox IsSynchronizedWithCurrentItem="True" IsReadOnly="True" x:Name="TypeComboBox" ItemsSource="{Binding Mode=OneWay}" ItemTemplate="{DynamicResource AddinInfoTemplate}"/>
 			</DockPanel>
 			<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,5,0,5">
-				<Button Content="Create" x:Name="CreateButton" Click="CreateButton_Click" Margin="0,0,5,0"/>
-				<Button Content="Cancel" x:Name="CancelButton" Click="CancelButton_Click" Margin="5,0,0,0"/>
+				<Button Content="Create" IsDefault="True" x:Name="CreateButton" Click="CreateButton_Click" Margin="0,0,5,0"/>
+				<Button Content="Cancel" IsCancel="True" x:Name="CancelButton" Click="CancelButton_Click" Margin="5,0,0,0"/>
 			</StackPanel>
 		</StackPanel>
 		<ListBox IsSynchronizedWithCurrentItem="True" x:Name="AccountListBox" DockPanel.Dock="Top" ItemsSource="{Binding Mode=OneWay}" ItemTemplate="{DynamicResource AccountListItemTemplate}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>

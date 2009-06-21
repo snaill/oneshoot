@@ -41,7 +41,7 @@ namespace OneShoot
             AccountInfo acc = new AccountInfo();
             acc.UserName = UserNameTextBox.Text;
             acc.Password = PasswordTextBox.Password;
-            acc.Type = ((AddinInfo)TypeComboBox.SelectedItem).Name;
+            acc.Type = (TypeComboBox.SelectedItem as AddinInfo).Name;
             Manager.AccountMgr.Add(acc);
 
             //
@@ -62,13 +62,11 @@ namespace OneShoot
             UserNameTextBox.Text = "";
             UserNameTextBox.Focus();
             PasswordTextBox.Clear();
-            if (TypeComboBox.SelectedIndex < 0 && TypeComboBox.Items.Count > 0 )
-                TypeComboBox.SelectedIndex = 0;
         }
 
         private void Delete_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            Manager.AccountMgr.Remove( AccountListBox.SelectedItem as AccountInfo );
+            Manager.AccountMgr.Remove( ( sender as Image ).DataContext as AccountInfo );
             AccountListBox.ItemsSource = Manager.AccountMgr;
         }
 	}

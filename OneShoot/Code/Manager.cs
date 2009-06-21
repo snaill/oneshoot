@@ -8,8 +8,34 @@ namespace OneShoot
 {
     public static class Manager
     {
-        public static AccountManager AccountMgr = new AccountManager();
-        public static AddinManager AddinMgr = new AddinManager();
+        private static AccountManager _accountMgr = null;
+        public static AddinManager _addinMgr = null;
+
+        public static AccountManager AccountMgr {
+            get 
+            {
+                if ( null == _accountMgr )
+                {
+                    _accountMgr = new AccountManager();
+                    _accountMgr.Init();
+                }
+                return _accountMgr;
+            }
+        }
+
+        public static AddinManager AddinMgr
+        {
+            get
+            {
+                if (null == _addinMgr)
+                {
+                    _addinMgr = new AddinManager();
+                    _addinMgr.Init();
+                }
+
+                return _addinMgr;
+            }
+        }
 
         public const string AccountFile = "Account.xml";
         public const string AddinFile = "OneShoot.addin";
@@ -19,9 +45,6 @@ namespace OneShoot
 
         public static void Init()
         {
-            AddinMgr.Init();
-            AccountMgr.Init();
-
             //
             time = new System.Windows.Threading.DispatcherTimer();
             time.Interval = new TimeSpan(0, 5, 0);
