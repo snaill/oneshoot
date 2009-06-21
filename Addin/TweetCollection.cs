@@ -9,10 +9,6 @@ namespace OneShoot.Addin
 {
     public class TweetCollection : ObservableCollection<ITweet>
     {
-        #region INotifyCollectionChanged Members
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
-        #endregion
-        
         public TweetCollection() { }
         public TweetCollection(ITweet[] tweets)
         {
@@ -27,8 +23,8 @@ namespace OneShoot.Addin
         {
             base.Add(tweet);
 
-            if (CollectionChanged != null)
-                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add));
+            //if (CollectionChanged != null)
+            //    CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add));
 
         }
     }

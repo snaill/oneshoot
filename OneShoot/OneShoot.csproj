@@ -54,6 +54,9 @@
     <Compile Include="TitleBarControl.xaml.cs">
       <DependentUpon>TitleBarControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TweetsControl.xaml.cs">
+      <DependentUpon>TweetsControl.xaml</DependentUpon>
+    </Compile>
     <Page Include="AccountControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -66,8 +69,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="TweetsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Resource Include="Resource\close.png" />
+    <Resource Include="Resource\DM.png" />
+    <Resource Include="Resource\favorites.png" />
+    <Resource Include="Resource\Home.ico" />
     <Resource Include="Resource\Mentions.ico" />
+    <Resource Include="Resource\reply.png" />
+    <Resource Include="Resource\retweet.png" />
     <Resource Include="Resource\Tweets.ico" />
     <Resource Include="Resource\OneShoot.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
