@@ -69,7 +69,13 @@ namespace OneShoot
         public new void Add(AccountInfo acc)
         {
             // auth
-            
+            IService service = acc.Service;
+            if (null == service)
+                return;
+
+            if (!service.VerifyAccount(acc.UserName, acc.Password))
+                return;
+
             // add
             base.Add(acc);
 
