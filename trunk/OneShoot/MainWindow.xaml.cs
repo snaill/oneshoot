@@ -30,7 +30,7 @@ namespace OneShoot
             else
             {
                 Manager.Refresh();
-                TweetListBox.ItemsSource = Manager.Tweets;
+                TweetsListBox.TweetListBox.ItemsSource = Manager.Tweets;
             }
         }
 

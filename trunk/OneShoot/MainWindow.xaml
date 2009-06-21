@@ -50,14 +50,7 @@
 		<OneShoot:TitleBarControl x:Name="Header" DockPanel.Dock="Top"/>
 		<TabControl x:Name="Tabs" IsSynchronizedWithCurrentItem="True" Width="Auto" Height="Auto" DockPanel.Dock="Bottom" TabStripPlacement="Bottom">
 			<TabItem Header="Home" x:Name="HomeTab">
-				<DockPanel x:Name="TweetPanel">
-					<DockPanel x:Name="NewTweetGridLayout" Visibility="Collapsed" DockPanel.Dock="Top">
-						<TextBox Text="" x:Name="TweetTextBox" DockPanel.Dock="Left"/>
-						<Button Content="Create" x:Name="UpdateButton"  DockPanel.Dock="Top"/>
-						<Button Content="Cancel" x:Name="Cancel2Button"  DockPanel.Dock="Bottom"/>
-					</DockPanel>
-					<ListBox IsSynchronizedWithCurrentItem="True" x:Name="TweetListBox" ItemsSource="{Binding Mode=OneWay}" ItemTemplate="{DynamicResource TweetListItemTemplate}" DockPanel.Dock="Bottom" ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
-				</DockPanel>
+				<OneShoot:TweetsControl x:Name="TweetsListBox"/>
 			</TabItem>
 			<TabItem x:Name="UpdateTab" Header="Update" />
 			<TabItem x:Name="RefreshTab" Header="Refresh" />
