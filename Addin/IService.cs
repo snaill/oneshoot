@@ -18,7 +18,10 @@ namespace OneShoot.Addin
         string UserName { get; set; }
         string Password { get; set; }
 
+        bool VerifyAccount(string userName, string password );
+
         TweetCollection GetTimeline( Timeline tl, string userId, string since, int max );
+
 
         //ITweet AddTweet(string text);
         //ITweet AddTweet(string text, double replyid);
