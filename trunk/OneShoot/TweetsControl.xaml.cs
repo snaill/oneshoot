@@ -17,6 +17,7 @@ namespace OneShoot
 			this.InitializeComponent();
 
 			// 在此点之下插入创建对象所需的代码。
+            
 		}
 	}
 }

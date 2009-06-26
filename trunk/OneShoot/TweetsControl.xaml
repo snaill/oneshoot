@@ -8,6 +8,7 @@
 	x:Name="UserControl"
 	d:DesignWidth="340" d:DesignHeight="470.04">
 	<UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="Boolean2Visibility" />
         <DataTemplate x:Key="TweetListItemTemplate">
 			<Grid Grid.IsSharedSizeScope="False" x:Name="LayoutRoot">
                     <Grid.RowDefinitions>
@@ -26,7 +27,7 @@
 				</DockPanel>
 				<TextBlock Text="{Binding Path=Text}" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" d:LayoutOverrides="Height" Grid.Row="1" Grid.Column="1"/>
 				<StackPanel x:Name="ActionPanel" Visibility="Hidden" Orientation="Horizontal" VerticalAlignment="Top" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Margin="0,2,10,2">
-					<Image Source="Resource\retweet.png" Width="16" Height="16" x:Name="Retweet" ToolTip="Retweet" Margin="2,0,2,0"/>
+					<Image Source="Resource\retweet.png" Width="16" Height="16" x:Name="Retweet" ToolTip="Retweet" Margin="2,0,2,0" Visibility="{Binding Path=IsReply, Converter={StaticResource Boolean2Visibility}}"/>
 					<Image Source="Resource\DM.png" Width="16" Height="16" x:Name="DM" ToolTip="Direct Message" Margin="2,0,2,0"/>
 					<Image Source="Resource\reply.png" Width="16" Height="16" x:Name="Reply" ToolTip="Reply" Margin="2,0,2,0"/>
 					<Image Source="Resource\bin_closed.png" Width="16" Height="16" x:Name="Delete" ToolTip="Delete" Margin="2,0,2,0"/>
