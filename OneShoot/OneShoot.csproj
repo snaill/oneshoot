@@ -48,6 +48,7 @@
     <Compile Include="Code\Account.cs" />
     <Compile Include="Code\Addin.cs" />
     <Compile Include="Code\Manager.cs" />
+    <Compile Include="Code\ValueConverter.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>

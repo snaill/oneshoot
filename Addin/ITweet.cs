@@ -14,7 +14,7 @@ namespace OneShoot.Addin
         public string Text { get; set; }
 
         //
-        public bool IsReply { get { return true; } set { } }
+        public bool IsReply { get { return false; } set { } }
 
         //
         public IUser User { get; set; }
