@@ -27,5 +27,11 @@ namespace OneShoot.Addin
             //    CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add));
 
         }
+
+        public void AddRange(TweetCollection tweets)
+        {
+            for ( int i = 0; i < tweets.Count; i ++ )
+                Add( tweets[i] );
+        }
     }
 }

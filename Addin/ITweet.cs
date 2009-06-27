@@ -17,6 +17,12 @@ namespace OneShoot.Addin
         public bool IsReply { get { return false; } set { } }
 
         //
+        public bool CanReply { get; set; }
+        public bool CanDM { get; set; }
+        public bool CanRetweet { get; set; }
+        public bool CanDelete { get; set; }
+
+        //
         public IUser User { get; set; }
     }
 }
