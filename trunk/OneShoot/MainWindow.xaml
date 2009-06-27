@@ -52,8 +52,6 @@
 			<TabItem Header="Home" x:Name="HomeTab">
 				<OneShoot:TweetsControl x:Name="TweetsListBox"/>
 			</TabItem>
-			<TabItem x:Name="UpdateTab" Header="Update" />
-			<TabItem x:Name="RefreshTab" Header="Refresh" />
 			<TabItem x:Name="AccountTab" Header="Account">
 				<OneShoot:AccountControl/>
 			</TabItem>

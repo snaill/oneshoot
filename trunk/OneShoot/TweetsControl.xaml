@@ -42,15 +42,19 @@
         </DataTemplate>
 	</UserControl.Resources>
 
-	<Grid x:Name="LayoutRoot">
-		<DockPanel x:Name="NewTweetGridLayout" Visibility="Collapsed" DockPanel.Dock="Top">
-			<TextBox Text="" x:Name="TweetTextBox" DockPanel.Dock="Left"/>
-			<Button Content="Create" x:Name="UpdateButton"  DockPanel.Dock="Top"/>
-			<Button Content="Cancel" x:Name="Cancel2Button"  DockPanel.Dock="Bottom"/>
-		</DockPanel>
+	<DockPanel x:Name="LayoutRoot">
+		<Button Content="New Tweet" DockPanel.Dock="Bottom" x:Name="NewButton" Click="NewButton_Click" Margin="0,5,0,0"/>
+		<StackPanel x:Name="NewGridLayout" Visibility="Collapsed" DockPanel.Dock="Bottom">
+			<TextBox Text="" x:Name="TweetTextBox" DockPanel.Dock="Left" Margin="5,5,5,5" Height="80" TextChanged="TweetTextBox_TextChanged"/>
+			<DockPanel Margin="0,0,0,5">
+				<Button Content="Cancel" IsCancel="True" x:Name="CancelButton" Click="CancelButton_Click" HorizontalAlignment="Stretch" DockPanel.Dock="Right" Margin="5,0,5,0"/>
+				<Button Content="Update" IsDefault="True" x:Name="UpdateButton" Click="UpdateButton_Click" DockPanel.Dock="Right" Margin="5,0,5,0"/>
+				<Label Content="140" HorizontalAlignment="Left" x:Name="CountLabel"/>
+			</DockPanel>
+		</StackPanel>
 		<ListBox IsSynchronizedWithCurrentItem="True" x:Name="TweetListBox" 
-                 ItemsSource="{Binding Mode=OneWay}" ItemTemplate="{DynamicResource TweetListItemTemplate}" 
-                 DockPanel.Dock="Bottom" ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-                 HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
-	</Grid>
+			ItemsSource="{Binding Mode=OneWay}" ItemTemplate="{DynamicResource TweetListItemTemplate}" 
+			DockPanel.Dock="Bottom" ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+			HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
+	</DockPanel>
 </UserControl>
