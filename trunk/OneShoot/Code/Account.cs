@@ -5,15 +5,37 @@ using System.Text;
 using System.Xml.Linq;
 using System.Collections.Specialized;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using OneShoot.Addin;
 
 namespace OneShoot
 {
-    public class AccountInfo
+    public class AccountInfo : INotifyPropertyChanged 
     {
+        // Summary:
+        //     Occurs when a property value changes.
+        public event PropertyChangedEventHandler PropertyChanged;
+
         protected IService service = null;
 
-        public string UserName { get; set; }
+        protected void OnPropertyChanged(string propName)
+        {
+            if (null != PropertyChanged)
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
+        }
+
+        private string _userName;
+        public string UserName
+        {
+            get {
+                return _userName;
+            }
+            set
+            {
+                _userName = value;
+                OnPropertyChanged("UserName");
+            } 
+        }
         public string Password { get; set; }
         public string Type { get; set; }
         public AddinInfo Addin
