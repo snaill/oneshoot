@@ -5,37 +5,15 @@ using System.Text;
 using System.Xml.Linq;
 using System.Collections.Specialized;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using OneShoot.Addin;
 
 namespace OneShoot
 {
-    public class AccountInfo : INotifyPropertyChanged 
+    public class AccountInfo
     {
-        // Summary:
-        //     Occurs when a property value changes.
-        public event PropertyChangedEventHandler PropertyChanged;
-
         protected IService service = null;
 
-        protected void OnPropertyChanged(string propName)
-        {
-            if (null != PropertyChanged)
-                PropertyChanged(this, new PropertyChangedEventArgs(propName));
-        }
-
-        private string _userName;
-        public string UserName
-        {
-            get {
-                return _userName;
-            }
-            set
-            {
-                _userName = value;
-                OnPropertyChanged("UserName");
-            } 
-        }
+        public string UserName { get; set; }
         public string Password { get; set; }
         public string Type { get; set; }
         public AddinInfo Addin
@@ -74,7 +52,7 @@ namespace OneShoot
                            select new AccountInfo
                            {
                                UserName = acc.Attribute("userName").Value,
-                               Password = acc.Attribute("password").Value,
+                               Password = Decode(acc.Attribute("password").Value),
                                Type = acc.Attribute("type").Value
                            };
 
@@ -106,7 +84,7 @@ namespace OneShoot
             XElement accElem = new XElement(
                 "Account",
                 new XAttribute("userName", acc.UserName),
-                new XAttribute("password", acc.Password),
+                new XAttribute("password", Encode(acc.Password)),
                 new XAttribute("type", acc.Type));
             xml.Root.Add( accElem );
             xml.Save( Manager.AccountFile );
@@ -126,6 +104,18 @@ namespace OneShoot
 
             // 保存xml
             xml.Save(Manager.AccountFile);
+        }
+
+        protected string Encode(string code)
+        {
+            byte[] bytes = Encoding.Default.GetBytes(code);
+            return Convert.ToBase64String(bytes);
+        }
+
+        protected string Decode(string code)
+        {
+            byte[] outputb = Convert.FromBase64String(code);
+            return Encoding.Default.GetString(outputb);
         }
     }
 }
