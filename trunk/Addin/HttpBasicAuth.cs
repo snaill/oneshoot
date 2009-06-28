@@ -20,19 +20,47 @@ namespace OneShoot.Addin
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        public System.Net.WebResponse GetResponse(string url)
+        public System.Net.WebResponse Get(Url url)
         {
             try
             {
-                System.Net.WebRequest req = System.Net.WebRequest.Create(url);
+                System.Net.WebRequest req = System.Net.WebRequest.Create( url.ToString() );
                 System.Net.CredentialCache myCache = new System.Net.CredentialCache();
-                myCache.Add(new Uri(url), "Basic", new System.Net.NetworkCredential(UserName, Password));
+                myCache.Add(new Uri(url.ToString()), "Basic", new System.Net.NetworkCredential(UserName, Password));
                 req.Credentials = myCache;
                 req.Method = "GET";
                 req.Proxy = WebProxy;
 
                 return req.GetResponse();
 
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public System.Net.WebResponse Post( Url url)
+        {
+            try {
+                // Create the web request  
+                System.Net.WebRequest req = System.Net.WebRequest.Create( url.HostAndPath );
+                System.Net.CredentialCache myCache = new System.Net.CredentialCache();
+                myCache.Add(new Uri(url.HostAndPath), "Basic", new System.Net.NetworkCredential(UserName, Password));
+                req.Credentials = myCache;
+                req.Method = "POST";
+                req.Proxy = WebProxy;
+
+                string param = url.Query;
+                req.ContentType = "application/x-www-form-urlencoded";
+                req.ContentLength = param.Length;
+
+                // Write the request paramater
+                System.IO.StreamWriter stOut = new System.IO.StreamWriter(req.GetRequestStream(), System.Text.Encoding.ASCII);
+                stOut.Write(param);
+                stOut.Close();
+
+                return req.GetResponse();
             }
             catch (Exception ex)
             {

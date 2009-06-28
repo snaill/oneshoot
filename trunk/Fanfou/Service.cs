@@ -34,7 +34,7 @@ namespace OneShoot.Addin.Fanfou
 
                 FanfouApiUri uri = new FanfouApiUri();
                 uri.verify_credentials();
-                auth.GetResponse(uri.ToString());
+                auth.Get(uri);
             }
             catch (Exception)
             {
@@ -72,7 +72,15 @@ namespace OneShoot.Addin.Fanfou
 
         protected T ApiGet<T>( Url url)
         {
-            System.Net.WebResponse resp = Auth.GetResponse(url.ToString());
+            System.Net.WebResponse resp = Auth.Get(url);
+            System.IO.Stream stream = resp.GetResponseStream();
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(T));
+            return (T)serializer.ReadObject(stream);
+        }
+
+        protected T ApiPost<T>(Url url)
+        {
+            System.Net.WebResponse resp = Auth.Post(url);
             System.IO.Stream stream = resp.GetResponseStream();
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(T));
             return (T)serializer.ReadObject(stream);

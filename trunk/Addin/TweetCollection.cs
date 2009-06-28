@@ -21,11 +21,20 @@ namespace OneShoot.Addin
 
         public new void Add(ITweet tweet)
         {
+            for (int i = 0; i < Count; i++)
+            {
+                //if ( tweet.DateCreated == Items[i].DateCreated )
+                //{
+                    
+                //}
+                if (tweet.DateCreated > Items[i].DateCreated)
+                {
+                    base.Insert(i, tweet);
+                    return;
+                }
+            }
+
             base.Add(tweet);
-
-            //if (CollectionChanged != null)
-            //    CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add));
-
         }
 
         public void AddRange(TweetCollection tweets)
