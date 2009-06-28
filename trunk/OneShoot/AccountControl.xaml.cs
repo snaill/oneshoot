@@ -17,10 +17,15 @@ namespace OneShoot
 			this.InitializeComponent();
 
 			// 在此点之下插入创建对象所需的代码。
-            AccountListBox.ItemsSource = Manager.AccountMgr;
-            TypeComboBox.ItemsSource = Manager.AddinMgr;
+            AccountListBox.ItemsSource = new AccountManager();
+            Manager.AccountManager = AccountListBox.ItemsSource as AccountManager;
+            Manager.AccountManager.Init();
 
-            if ( Manager.AccountMgr.Count == 0 )
+            TypeComboBox.ItemsSource = new AddinManager();
+            Manager.AddinManager = TypeComboBox.ItemsSource as AddinManager;
+            Manager.AddinManager.Init();
+
+            if (Manager.AccountManager.Count == 0)
                 NewButton_Click(null, null );
 		}
 
@@ -42,10 +47,9 @@ namespace OneShoot
             acc.UserName = UserNameTextBox.Text;
             acc.Password = PasswordTextBox.Password;
             acc.Type = (TypeComboBox.SelectedItem as AddinInfo).Name;
-            Manager.AccountMgr.Add(acc);
+            Manager.AccountManager.Add(acc);
 
             //
-            AccountListBox.ItemsSource = Manager.AccountMgr;
             CancelButton_Click( null, null );
         }
 
@@ -66,8 +70,7 @@ namespace OneShoot
 
         private void Delete_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            Manager.AccountMgr.Remove( ( sender as Image ).DataContext as AccountInfo );
-            AccountListBox.ItemsSource = Manager.AccountMgr;
+            Manager.AccountManager.Remove((sender as Image).DataContext as AccountInfo);
         }
 	}
 }

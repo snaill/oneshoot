@@ -8,12 +8,18 @@ using System.ServiceModel.Web;
 
 namespace OneShoot.Addin
 {
-    public class HttpBasicAuth
+    public class HttpBasicAuth : IAuth
     {
+        public HttpBasicAuth(string service)
+        {
+            Service = service;
+        }
+
         public System.Net.IWebProxy WebProxy { get; set; }
 
         public string UserName { get; set; }
         public string Password { get; set; }
+        public string Service { get; set; }
 
         /// <summary>
         /// 获取

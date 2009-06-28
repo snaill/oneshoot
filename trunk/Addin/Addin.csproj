@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HttpBasicAuth.cs" />
+    <Compile Include="IAuth.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="ITweet.cs" />
     <Compile Include="IUser.cs" />

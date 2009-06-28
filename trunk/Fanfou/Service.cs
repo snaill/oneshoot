@@ -16,11 +16,11 @@ namespace OneShoot.Addin.Fanfou
     /// </summary>
     public class Service : OneShoot.Addin.IService
     {
-        protected HttpBasicAuth Auth = new HttpBasicAuth();
+        protected HttpBasicAuth Auth = new HttpBasicAuth("fanfou.com");
 
         public const int MaxCountOnePage = 20;
 
-        public System.Net.IWebProxy WebProxy { get; set; }
+        public System.Net.IWebProxy WebProxy { get { return Auth.WebProxy; } set { Auth.WebProxy = value; } }
         public string UserName { get { return Auth.UserName; } set { Auth.UserName = value; } }
         public string Password { get { return Auth.Password; } set { Auth.Password = value; } }
 
@@ -28,7 +28,7 @@ namespace OneShoot.Addin.Fanfou
         {
             try
             {
-                HttpBasicAuth auth = new HttpBasicAuth();
+                HttpBasicAuth auth = new HttpBasicAuth("fanfou.com");
                 auth.UserName = userName;
                 auth.Password = password;
 
@@ -66,7 +66,7 @@ namespace OneShoot.Addin.Fanfou
             Tweet[] tweets = ApiGet<Tweet[]>( uri );
             TweetCollection tc = new TweetCollection();
             for (int i = 0; i < tweets.Length; i++)
-                tc.Add(tweets[i].toITweet());
+                tc.Add(tweets[i].toITweet( Auth ));
             return tc;
         }
 

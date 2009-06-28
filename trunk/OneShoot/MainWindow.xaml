@@ -6,46 +6,8 @@
 	x:Class="OneShoot.MainWindow"
 	x:Name="Window"
 	Title="One Shoot"
-	Width="350" Height="550" WindowStyle="None" WindowStartupLocation="CenterScreen" MinWidth="350" MinHeight="100" Icon="Resource\OneShoot.ico" Loaded="Window_Loaded" xmlns:OneShoot_Addin="clr-namespace:OneShoot.Addin;assembly=OneShoot.Addin" ResizeMode="NoResize" AllowsTransparency="True" Background="#00FFFFFF">
-	<Window.Resources>
-		<DataTemplate x:Key="AddinInfoTemplate">
-			<StackPanel>
-				<Label Content="{Binding Path=Name}"/>
-			</StackPanel>
-		</DataTemplate>
-		<DataTemplate x:Key="AccountListItemTemplate">
-			<DockPanel>
-                <Image DockPanel.Dock="Left" Source="http://twitter.com/favicon.ico"/>
-				<Label Content="{Binding Path=UserName}"/>
-			</DockPanel>
-		</DataTemplate>
-        <DataTemplate x:Key="TweetListItemTemplate">
-		<Grid Grid.IsSharedSizeScope="False" ShowGridLines="False">
-			<Grid.RowDefinitions>
-				<RowDefinition/>
-				<RowDefinition/>
-				<RowDefinition/>
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="*"/>
-			</Grid.ColumnDefinitions>
-       		<Image Width="48" Height="48" Source="{Binding Path=User.ImageUrl}" Stretch="Fill" Grid.RowSpan="3" VerticalAlignment="Top" HorizontalAlignment="Left" />
-       		<StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
-       			<Label Content="{Binding Path=User.ScreenName}" FontWeight="Bold" FontSize="12" Foreground="#FF000000" d:IsStaticText="True" x:Name="UserName" VerticalAlignment="Bottom"/>
-       			<Label Content="{Binding Path=DateCreated}" FontSize="9" Foreground="#FF808080" FontWeight="Normal" x:Name="Date" VerticalAlignment="Bottom"/>
-       			<Label Content="{Binding Path=Source}" FontSize="9" Foreground="#FF808080" FontWeight="Normal" x:Name="Source" VerticalAlignment="Bottom"/>
-       		</StackPanel>
-       		<TextBlock Text="{Binding Path=Text}" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" d:LayoutOverrides="Height" Grid.Row="1" Grid.Column="1"/>
-       		<StackPanel Orientation="Horizontal" VerticalAlignment="Top" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch">
-       			<Image Source="Resource\Recycle.ico" Width="16" Height="16"/>
-       			<Image Source="Resource\Recycle.ico" Width="16" Height="16"/>
-       			<Image Source="Resource\Recycle.ico" Width="16" Height="16"/>
-       		</StackPanel>
-        	</Grid>
-        </DataTemplate>
-        <ObjectDataProvider x:Key="AccountInfoDS" d:IsDataSource="True" ObjectType="{x:Type OneShoot:AccountInfo}"/>
-    </Window.Resources>
+	Width="350" Height="550" WindowStyle="None" WindowStartupLocation="CenterScreen" MinWidth="350" MinHeight="100" Icon="Resource\OneShoot.ico" Loaded="Window_Loaded" Closed="Window_Closed" ResizeMode="NoResize" AllowsTransparency="True" Background="#00FFFFFF">
+	<Window.Resources/>
 	<DockPanel x:Name="LayoutRoot">
 		<OneShoot:TitleBarControl x:Name="Header" DockPanel.Dock="Top"/>
 		<TabControl x:Name="Tabs" IsSynchronizedWithCurrentItem="True" Width="Auto" Height="Auto" DockPanel.Dock="Bottom" TabStripPlacement="Bottom">

@@ -23,20 +23,21 @@ namespace OneShoot
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //
-            Manager.Init();
-
-            if (Manager.AccountMgr.Count == 0)
+            if (Manager.AccountManager.Count == 0)
                 Tabs.SelectedItem = AccountTab;
             else
             {
-                Manager.Refresh();
-                TweetsListBox.TweetListBox.ItemsSource = Manager.Tweets;
+                TweetsListBox.TweetListBox.ItemsSource = new OneShoot.Addin.TweetCollection();
+                Manager.Tweets = TweetsListBox.TweetListBox.ItemsSource as OneShoot.Addin.TweetCollection;
+                Manager.Tweets.MaxCount = Parameters.MaxCountOnScreen;
+                Manager.RefreshThread.Start(this.Dispatcher);
             }
         }
 
-        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        private void Window_Closed(object sender, EventArgs e)
         {
-            Manager.Refresh();
+            Manager.RefreshThread.Abort();
         }
+
 	}
 }
