@@ -40,7 +40,7 @@ namespace OneShoot
                         (obj as System.Windows.Threading.Dispatcher).Invoke(new Action<OneShoot.Addin.TweetCollection>(AddNewTweets), tc);
                     }
 
-                    Manager.nRefreshTick += 10;
+                    Manager.nRefreshTick += Parameters.RefreshTick;
                 }
 
                 System.Threading.Thread.Sleep(1000);
