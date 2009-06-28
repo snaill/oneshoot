@@ -8,71 +8,44 @@ namespace OneShoot
 {
     public static class Manager
     {
-        private static AccountManager _accountMgr = null;
-        public static AddinManager _addinMgr = null;
-
-        public static AccountManager AccountMgr {
-            get 
-            {
-                if ( null == _accountMgr )
-                {
-                    _accountMgr = new AccountManager();
-                    _accountMgr.Init();
-                }
-                return _accountMgr;
-            }
-        }
-
-        public static AddinManager AddinMgr
-        {
-            get
-            {
-                if (null == _addinMgr)
-                {
-                    _addinMgr = new AddinManager();
-                    _addinMgr.Init();
-                }
-
-                return _addinMgr;
-            }
-        }
-
         public const string AccountFile = "Account.xml";
         public const string AddinFile = "OneShoot.addin";
+        
+        public static AccountManager AccountManager = null;
+        public static AddinManager AddinManager = null;
 
-        static System.Windows.Threading.DispatcherTimer time = null;
-        public static OneShoot.Addin.TweetCollection Tweets = new OneShoot.Addin.TweetCollection();
+        public static System.Threading.Thread RefreshThread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(Manager.Refresh));
+        public static int nRefreshTick = 0;
 
-        public static void Init()
+        public static volatile OneShoot.Addin.TweetCollection Tweets = new OneShoot.Addin.TweetCollection();
+
+        private static void AddNewTweets(OneShoot.Addin.TweetCollection tc)
         {
-            //
-            time = new System.Windows.Threading.DispatcherTimer();
-            time.Interval = new TimeSpan(0, 5, 0);
-            time.Tick += new EventHandler( timer_Tick );
-            time.Start();
+            Tweets.AddRange(tc);
         }
 
-        static void timer_Tick(object sender, EventArgs e)
+        private static void Refresh(object obj)
         {
-            Refresh();
-        }
-
-        public static void Refresh()
-        {
-            time.Stop();
-
-            for (int i = 0; i < AccountMgr.Count; i++)
+            while (Manager.nRefreshTick >= 0)
             {
-                OneShoot.Addin.IService service = AccountMgr[i].Service;
-                if ( null == service )
-                    continue;
+                if (0 == Manager.nRefreshTick)
+                {
+                    for (int i = 0; i < AccountManager.Count; i++)
+                    {
+                        OneShoot.Addin.IService service = AccountManager[i].Service;
+                        if (null == service)
+                            continue;
 
-                OneShoot.Addin.TweetCollection tc = service.GetTimeline(OneShoot.Addin.Timeline.Friends, AccountMgr[i].UserName, "", 100);
-                Tweets.AddRange( tc );
+                        OneShoot.Addin.TweetCollection tc = service.GetTimeline(OneShoot.Addin.Timeline.Friends, AccountManager[i].UserName, "", 100);
+                        (obj as System.Windows.Threading.Dispatcher).Invoke(new Action<OneShoot.Addin.TweetCollection>(AddNewTweets), tc);
+                    }
+
+                    Manager.nRefreshTick += 10;
+                }
+
+                System.Threading.Thread.Sleep(1000);
+                Manager.nRefreshTick--;
             }
-            time.Start();
         }
-
-    
     }
 }

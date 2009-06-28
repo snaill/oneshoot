@@ -14,7 +14,6 @@ namespace OneShoot.Addin
         {
             for (int i = 0; i < tweets.Length; i++)
                 Add(tweets[i]); 
-         
         }
 
         public int MaxCount { get; set; }
@@ -23,10 +22,9 @@ namespace OneShoot.Addin
         {
             for (int i = 0; i < Count; i++)
             {
-                //if ( tweet.DateCreated == Items[i].DateCreated )
-                //{
-                    
-                //}
+                if (tweet.DateCreated == Items[i].DateCreated && tweet.Auth == Items[i].Auth )
+                    return;
+
                 if (tweet.DateCreated > Items[i].DateCreated)
                 {
                     base.Insert(i, tweet);
@@ -35,6 +33,8 @@ namespace OneShoot.Addin
             }
 
             base.Add(tweet);
+            if (MaxCount > 0 && Count > MaxCount)
+                base.RemoveAt(Count - 1);
         }
 
         public void AddRange(TweetCollection tweets)

@@ -24,5 +24,8 @@ namespace OneShoot.Addin
 
         //
         public IUser User { get; set; }
+
+        //
+        public IAuth Auth { get; set; }
     }
 }

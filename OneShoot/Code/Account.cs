@@ -20,7 +20,7 @@ namespace OneShoot
         {
             get
             {
-                return Manager.AddinMgr.GetAddinInfo(Type);
+                return Manager.AddinManager.GetAddinInfo(Type);
             }
         }
         public IService Service 
@@ -28,7 +28,7 @@ namespace OneShoot
             get {
                 if (service == null)
                 {
-                    service =  Manager.AddinMgr.CreateService(Type);
+                    service = Manager.AddinManager.CreateService(Type);
                     if (null != service)
                     {
                         service.UserName = UserName;
