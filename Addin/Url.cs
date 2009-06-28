@@ -13,23 +13,42 @@ namespace OneShoot.Addin
         public string Path { get; set; }
         public NameValueCollection Parameters { get; set; }
 
-        public new string ToString() 
+        public string HostAndPath
         {
-            string  url = string.Format("{0}://{1}/{2}", Scheme, Host, Path );
-            int     index = 0;
-            if (null != Parameters)
+            get
             {
+                return string.Format("{0}://{1}/{2}", Scheme, Host, Path);
+            }
+        }
+
+        public string Query
+        {
+            get
+            {
+                if (null == Parameters)
+                    return "";
+
+                int index = 0;
+                string url = "";
                 foreach (string key in Parameters.AllKeys)
                 {
                     if (Parameters[key] == null || Parameters[key] == "")
                         continue;
 
-                    url += (0 == index) ? "?" : "&";
-                    url += key + "=" + Parameters[key];
-                }
-            }
+                    if ( 0 != index) 
+                        url += "&" + url;
 
-            return url;
+                    url += key + "=" + Parameters[key];
+                    index++;
+                }
+
+                return url;
+            }
+        }
+
+        public new string ToString() 
+        {
+            return Query == "" ? HostAndPath : HostAndPath + "?" + Query;
         }
    }
 }
