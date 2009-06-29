@@ -25,12 +25,10 @@ namespace OneShoot
             //
             if (Manager.AccountManager.Count == 0)
                 Tabs.SelectedItem = AccountTab;
-            else
-            {
-                TweetsListBox.TweetListBox.ItemsSource = new OneShoot.Addin.TweetCollection();
-                Manager.Tweets = TweetsListBox.TweetListBox.ItemsSource as OneShoot.Addin.TweetCollection;
-                Manager.Tweets.MaxCount = Parameters.MaxCountOnScreen;
-            }
+
+            TweetsListBox.TweetListBox.ItemsSource = new OneShoot.Addin.TweetCollection();
+            Manager.Tweets = TweetsListBox.TweetListBox.ItemsSource as OneShoot.Addin.TweetCollection;
+            Manager.Tweets.MaxCount = Parameters.MaxCountOnScreen;
             Manager.RefreshThread.Start(this.Dispatcher);
         }
 
