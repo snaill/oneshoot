@@ -11,13 +11,49 @@ namespace OneShoot
         public const string AccountFile = "Account.xml";
         public const string AddinFile = "OneShoot.addin";
         
-        public static AccountManager AccountManager = null;
-        public static AddinManager AddinManager = null;
-
         public static System.Threading.Thread RefreshThread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(Manager.Refresh));
         public static int nRefreshTick = 0;
 
-        public static volatile OneShoot.Addin.TweetCollection Tweets = new OneShoot.Addin.TweetCollection();
+        public static AccountManager _accountManager = null;
+        public static AddinManager _addinManager = null;
+        public static OneShoot.Addin.TweetCollection _tweets = null;
+
+        public static AccountManager AccountManager { 
+            get 
+            {
+                if (null == _accountManager)
+                {
+                    _accountManager = new AccountManager();
+                    _accountManager.Init();
+                }
+                return _accountManager;
+            }
+        }
+        public static AddinManager AddinManager
+        {
+            get
+            {
+                if (null == _addinManager)
+                {
+                    _addinManager = new AddinManager();
+                    _addinManager.Init();
+                }
+                return _addinManager;
+            }
+        }
+
+        public static OneShoot.Addin.TweetCollection Tweets
+        {
+            get
+            {
+                if (null == _tweets)
+                {
+                    _tweets = new OneShoot.Addin.TweetCollection();
+                    _tweets.MaxCount = Parameters.MaxCountOnScreen;
+                }
+                return _tweets;
+            }
+        }
 
         private static void AddNewTweets(OneShoot.Addin.TweetCollection tc)
         {

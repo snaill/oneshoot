@@ -17,13 +17,8 @@ namespace OneShoot
 			this.InitializeComponent();
 
 			// 在此点之下插入创建对象所需的代码。
-            AccountListBox.ItemsSource = new AccountManager();
-            Manager.AccountManager = AccountListBox.ItemsSource as AccountManager;
-            Manager.AccountManager.Init();
-
-            TypeComboBox.ItemsSource = new AddinManager();
-            Manager.AddinManager = TypeComboBox.ItemsSource as AddinManager;
-            Manager.AddinManager.Init();
+            AccountListBox.ItemsSource = Manager.AccountManager;
+            TypeComboBox.ItemsSource = Manager.AddinManager;
             TypeComboBox.SelectedIndex = 0;
 
             if (Manager.AccountManager.Count == 0)
