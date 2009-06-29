@@ -24,6 +24,7 @@ namespace OneShoot
             TypeComboBox.ItemsSource = new AddinManager();
             Manager.AddinManager = TypeComboBox.ItemsSource as AddinManager;
             Manager.AddinManager.Init();
+            TypeComboBox.SelectedIndex = 0;
 
             if (Manager.AccountManager.Count == 0)
                 NewButton_Click(null, null );

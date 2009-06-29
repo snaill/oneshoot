@@ -30,8 +30,8 @@ namespace OneShoot
                 TweetsListBox.TweetListBox.ItemsSource = new OneShoot.Addin.TweetCollection();
                 Manager.Tweets = TweetsListBox.TweetListBox.ItemsSource as OneShoot.Addin.TweetCollection;
                 Manager.Tweets.MaxCount = Parameters.MaxCountOnScreen;
-                Manager.RefreshThread.Start(this.Dispatcher);
             }
+            Manager.RefreshThread.Start(this.Dispatcher);
         }
 
         private void Window_Closed(object sender, EventArgs e)
