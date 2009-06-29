@@ -26,9 +26,9 @@ namespace OneShoot
 
         private static void Refresh(object obj)
         {
-            while (Manager.nRefreshTick >= 0)
+            while (true)
             {
-                if (0 == Manager.nRefreshTick)
+                if (0 >= Manager.nRefreshTick)
                 {
                     for (int i = 0; i < AccountManager.Count; i++)
                     {
@@ -40,7 +40,7 @@ namespace OneShoot
                         (obj as System.Windows.Threading.Dispatcher).Invoke(new Action<OneShoot.Addin.TweetCollection>(AddNewTweets), tc);
                     }
 
-                    Manager.nRefreshTick += Parameters.RefreshTick;
+                    Manager.nRefreshTick = Parameters.RefreshTick;
                 }
 
                 System.Threading.Thread.Sleep(1000);

@@ -88,6 +88,9 @@ namespace OneShoot
                 new XAttribute("type", acc.Type));
             xml.Root.Add( accElem );
             xml.Save( Manager.AccountFile );
+
+            //
+            Manager.nRefreshTick = 0;
         }
 
         public new void Remove(AccountInfo acc)
@@ -104,6 +107,9 @@ namespace OneShoot
 
             // 保存xml
             xml.Save(Manager.AccountFile);
+
+            //
+            Manager.nRefreshTick = 0;
         }
 
         protected string Encode(string code)
