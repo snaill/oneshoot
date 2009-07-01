@@ -38,6 +38,12 @@
                     <Setter TargetName="ActionPanel" Property="Visibility" Value="Visible"/>
                     <Setter Property="Background" TargetName="LayoutRoot" Value="#FF93A1E4"/>
                 </Trigger>
+                <DataTrigger Binding="{Binding Path=IsReply}" Value="true">
+                    <Setter Property="Background" TargetName="LayoutRoot" Value="#FB93F1A4"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=IsMy}" Value="true">
+                    <Setter Property="Background" TargetName="LayoutRoot" Value="#BB93F1B4"/>
+                </DataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
 	</UserControl.Resources>
