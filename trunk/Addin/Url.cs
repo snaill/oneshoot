@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Collections.Specialized;
 
 namespace OneShoot.Addin
 {
@@ -11,7 +10,7 @@ namespace OneShoot.Addin
         public string Scheme { get; set; }
         public string Host { get; set; }
         public string Path { get; set; }
-        public NameValueCollection Parameters { get; set; }
+        public Dictionary<string, string> Parameters { get; set; }
 
         public string HostAndPath
         {
@@ -30,7 +29,7 @@ namespace OneShoot.Addin
 
                 int index = 0;
                 string url = "";
-                foreach (string key in Parameters.AllKeys)
+                foreach (string key in Parameters.Keys)
                 {
                     if (Parameters[key] == null || Parameters[key] == "")
                         continue;
