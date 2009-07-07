@@ -17,13 +17,11 @@ namespace OneShoot.Addin.Fanfou
     public class Service : OneShoot.Addin.IService
     {
         protected HttpBasicAuth Auth = new HttpBasicAuth("fanfou.com");
-
-        public const int MaxCountOnePage = 20;
-
-        public System.Net.IWebProxy WebProxy { get { return Auth.WebProxy; } set { Auth.WebProxy = value; } }
+        protected const int MaxCountOnePage = 20;
+ 
+		public System.Net.IWebProxy WebProxy { get { return Auth.WebProxy; } set { Auth.WebProxy = value; } }
         public string UserName { get { return Auth.UserName; } set { Auth.UserName = value; } }
         public string Password { get { return Auth.Password; } set { Auth.Password = value; } }
-
         public bool VerifyAccount(string userName, string password)
         {
             try
@@ -44,7 +42,7 @@ namespace OneShoot.Addin.Fanfou
             return true;
         }
 
-        public TweetCollection GetTimeline( Timeline tl, string userId, string since, int max )
+        public TweetCollection GetTimeline( Timeline tl, string userId, int max )
         {
             FanfouApiUri uri = new FanfouApiUri();
             switch (tl)
@@ -70,7 +68,20 @@ namespace OneShoot.Addin.Fanfou
             return tc;
         }
 
-        protected T ApiGet<T>( Url url)
+        public ITweet Update(string text, string replyid, string source) 
+        {
+            FanfouApiUri uri = new FanfouApiUri();
+            uri.update(text, replyid, source);
+            return ApiPost<Tweet>(uri).toITweet(Auth);
+        }
+
+        public void Destroy(string id) {
+            FanfouApiUri uri = new FanfouApiUri();
+            uri.destroy(id);
+            ApiPost<Tweet>(uri);
+        }
+
+        protected T ApiGet<T>(Url url)
         {
             System.Net.WebResponse resp = Auth.Get(url);
             System.IO.Stream stream = resp.GetResponseStream();

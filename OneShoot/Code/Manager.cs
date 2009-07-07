@@ -72,7 +72,7 @@ namespace OneShoot
                         if (null == service)
                             continue;
 
-                        OneShoot.Addin.TweetCollection tc = service.GetTimeline(OneShoot.Addin.Timeline.Friends, AccountManager[i].UserName, "", 100);
+                        OneShoot.Addin.TweetCollection tc = service.GetTimeline(OneShoot.Addin.Timeline.Friends, AccountManager[i].UserName, Parameters.MaxCountOnScreen);
                         (obj as System.Windows.Threading.Dispatcher).Invoke(new Action<OneShoot.Addin.TweetCollection>(AddNewTweets), tc);
                     }
 

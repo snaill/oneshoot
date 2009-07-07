@@ -15,12 +15,12 @@ namespace OneShoot.Addin.Twitter
     public class Service : OneShoot.Addin.IService
     {
         public const string ApiUrl = "http://twitter.com/";
-        public const int MaxCountOnePage = 200;
-
         public System.Net.IWebProxy WebProxy { get; set; }
 
         public string UserName { get; set; }
         public string Password { get; set; }
+
+        public const int MaxCountOnePage = 200;
 
         public bool VerifyAccount(string userName, string password)
         {
@@ -37,7 +37,7 @@ namespace OneShoot.Addin.Twitter
             return true;
         }
 
-        public TweetCollection GetTimeline(Timeline tl, string userId, string since, int max)
+        public TweetCollection GetTimeline(Timeline tl, string userId, int max)
         {
             string url = "";
             switch (tl)
@@ -51,7 +51,7 @@ namespace OneShoot.Addin.Twitter
                 case Timeline.User:
                     {
                         url = string.Format(ApiUrl + "statuses/user_timeline.json?id={0}&count={1}&since_id={2}&page={3}",
-                            userId, 20, since, 1);
+                            userId, 20, 0, 1);
                     }
                     break;
                 case Timeline.Public:
@@ -62,7 +62,7 @@ namespace OneShoot.Addin.Twitter
                 case Timeline.Replies:
                     {
                         url = string.Format(ApiUrl + "statuses/replies.json?count={1}&since_id={2}&page={3}",
-                            20, since, 1);
+                            20, 0, 1);
                     }
                     break;
             }
@@ -72,6 +72,9 @@ namespace OneShoot.Addin.Twitter
                 tc.Add(tweets[i].toITweet());
             return tc;
         }
+
+        public ITweet Update(string text, string replyid, string source) { return null; }
+        public void Destroy(string id) { }
 
         /// <summary>
         /// 获取

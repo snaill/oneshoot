@@ -17,11 +17,14 @@ namespace OneShoot.Addin
     {
         string UserName { get; set; }
         string Password { get; set; }
+        System.Net.IWebProxy WebProxy { get; set; }
 
         bool VerifyAccount(string userName, string password );
 
-        TweetCollection GetTimeline( Timeline tl, string userId, string since, int max );
+        TweetCollection GetTimeline( Timeline tl, string userId, int max );
 
+        ITweet Update(string text, string replyid, string source);
+        void Destroy(string id);
 
         //ITweet AddTweet(string text);
         //ITweet AddTweet(string text, double replyid);
@@ -52,7 +55,5 @@ namespace OneShoot.Addin
 
         //ITweetCollection RetrieveMessages();
         //ITweetCollection RetrieveMessages(string since);
-
-        System.Net.IWebProxy WebProxy { get; set; }
     }
 }
