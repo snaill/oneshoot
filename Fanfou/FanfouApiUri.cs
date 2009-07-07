@@ -35,7 +35,7 @@ namespace OneShoot.Addin.Fanfou
         public void public_timeline( int count )
         {
             this.Path = "statuses/public_timeline.json";
-            this.Parameters = new System.Collections.Specialized.NameValueCollection();
+            this.Parameters = new Dictionary<string,string>();
             this.Parameters["count"] = count.ToString();
         }
 
@@ -49,7 +49,7 @@ namespace OneShoot.Addin.Fanfou
         public void friends_timeline(int count, string since_id, string max_id, int page )
         {
             this.Path = "statuses/friends_timeline.json";
-            this.Parameters = new System.Collections.Specialized.NameValueCollection();
+            this.Parameters = new Dictionary<string,string>();
             this.Parameters["count"] = count.ToString();
             this.Parameters["since_id"] = since_id;
             this.Parameters["max_id"] = max_id;
@@ -66,7 +66,7 @@ namespace OneShoot.Addin.Fanfou
         public void user_timeline(int count, string since_id, string max_id, int page)
         {
             this.Path = "statuses/user_timeline.json";
-            this.Parameters = new System.Collections.Specialized.NameValueCollection();
+            this.Parameters = new Dictionary<string,string>();
             this.Parameters["count"] = count.ToString();
             this.Parameters["since_id"] = since_id;
             this.Parameters["max_id"] = max_id;
@@ -83,7 +83,7 @@ namespace OneShoot.Addin.Fanfou
         public void replies(int count, string since_id, string max_id, int page)
         {
             this.Path = "statuses/replies.json";
-            this.Parameters = new System.Collections.Specialized.NameValueCollection();
+            this.Parameters = new Dictionary<string,string>();
             this.Parameters["count"] = count.ToString();
             this.Parameters["since_id"] = since_id;
             this.Parameters["max_id"] = max_id;
@@ -99,7 +99,7 @@ namespace OneShoot.Addin.Fanfou
         public void update(string status, string in_reply_to_status_id, string source )
         {
             this.Path = "statuses/update.json";
-            this.Parameters = new System.Collections.Specialized.NameValueCollection();
+            this.Parameters = new Dictionary<string,string>();
             this.Parameters["status"] = status;
             this.Parameters["in_reply_to_status_id"] = in_reply_to_status_id;
             this.Parameters["source"] = source;
@@ -112,7 +112,7 @@ namespace OneShoot.Addin.Fanfou
         public void destroy(string id)
         {
             this.Path = "statuses/destroy.json";
-            this.Parameters = new System.Collections.Specialized.NameValueCollection();
+            this.Parameters = new Dictionary<string,string>();
             this.Parameters["id"] = id;
         }
         #endregion
@@ -127,7 +127,7 @@ namespace OneShoot.Addin.Fanfou
         public void favorites(string id, int count, int page)
         {
             this.Path = "favorites.json";
-            this.Parameters = new System.Collections.Specialized.NameValueCollection();
+            this.Parameters = new Dictionary<string,string>();
             this.Parameters["id"] = id;
             this.Parameters["count"] = count.ToString();
             this.Parameters["page"] = page.ToString();
@@ -163,7 +163,7 @@ namespace OneShoot.Addin.Fanfou
         public void direct_messages(int count, string since_id, string max_id, int page)
         {
             this.Path = "direct_messages.json";
-            this.Parameters = new System.Collections.Specialized.NameValueCollection();
+            this.Parameters = new Dictionary<string,string>();
             this.Parameters["count"] = count.ToString();
             this.Parameters["since_id"] = since_id;
             this.Parameters["max_id"] = max_id;
@@ -180,7 +180,7 @@ namespace OneShoot.Addin.Fanfou
         public void direct_messages_send(int count, string since_id, string max_id, int page)
         {
             this.Path = "direct_messages/send.json";
-            this.Parameters = new System.Collections.Specialized.NameValueCollection();
+            this.Parameters = new Dictionary<string,string>();
             this.Parameters["count"] = count.ToString();
             this.Parameters["since_id"] = since_id;
             this.Parameters["max_id"] = max_id;
@@ -196,7 +196,7 @@ namespace OneShoot.Addin.Fanfou
         public void direct_messages_new(string user, string text, string in_reply_to_id)
         {
             this.Path = "direct_messages/new.json";
-            this.Parameters = new System.Collections.Specialized.NameValueCollection();
+            this.Parameters = new Dictionary<string,string>();
             this.Parameters["user"] = user;
             this.Parameters["text"] = text;
             this.Parameters["in_reply_to_id"] = in_reply_to_id;
@@ -209,7 +209,7 @@ namespace OneShoot.Addin.Fanfou
         public void direct_messages_destroy(string id)
         {
             this.Path = "direct_messages/destroy.json";
-            this.Parameters = new System.Collections.Specialized.NameValueCollection();
+            this.Parameters = new Dictionary<string,string>();
             this.Parameters["id"] = id;
         }
         #endregion
@@ -223,7 +223,7 @@ namespace OneShoot.Addin.Fanfou
         public void friends(string id, int page)
         {
             this.Path = "users/friends.json";
-            this.Parameters = new System.Collections.Specialized.NameValueCollection();
+            this.Parameters = new Dictionary<string,string>();
             this.Parameters["id"] = id;
             this.Parameters["page"] = page.ToString();
         }
@@ -236,7 +236,7 @@ namespace OneShoot.Addin.Fanfou
         public void followers(string id, int page)
         {
             this.Path = "users/followers.json";
-            this.Parameters = new System.Collections.Specialized.NameValueCollection();
+            this.Parameters = new Dictionary<string,string>();
             this.Parameters["id"] = id;
             this.Parameters["page"] = page.ToString();
         }
@@ -248,7 +248,7 @@ namespace OneShoot.Addin.Fanfou
         public void show(string id)
         {
             this.Path = "users/show.json";
-            this.Parameters = new System.Collections.Specialized.NameValueCollection();
+            this.Parameters = new Dictionary<string,string>();
             this.Parameters["id"] = id;
         }
 
@@ -259,7 +259,7 @@ namespace OneShoot.Addin.Fanfou
         public void friendships_create(string id)
         {
             this.Path = "friendships/create.json";
-            this.Parameters = new System.Collections.Specialized.NameValueCollection();
+            this.Parameters = new Dictionary<string,string>();
             this.Parameters["id"] = id;
         }
 
@@ -270,7 +270,7 @@ namespace OneShoot.Addin.Fanfou
         public void friendships_destroy(string id)
         {
             this.Path = "friendships/destroy.json";
-            this.Parameters = new System.Collections.Specialized.NameValueCollection();
+            this.Parameters = new Dictionary<string,string>();
             this.Parameters["id"] = id;
         }
         #endregion
