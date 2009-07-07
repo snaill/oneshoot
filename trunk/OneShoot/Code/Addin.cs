@@ -22,7 +22,7 @@ namespace OneShoot
             try
             {
                 XDocument config = XDocument.Load( Manager.AddinFile);
-                var accs = from acc in config.Root.Elements()
+                var accs = from acc in config.Root.Element("Twitter").Elements()
                            select new AddinInfo
                            {
                                Name = acc.Attribute("name").Value,

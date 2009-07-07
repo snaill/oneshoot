@@ -38,7 +38,7 @@ namespace OneShoot.Addin.Digu
             return true;
         }
 
-        public TweetCollection GetTimeline( Timeline tl, string userId, string since, int max )
+        public TweetCollection GetTimeline( Timeline tl, string userId, int max )
         {
             string url = "";
             switch ( tl )
@@ -46,13 +46,13 @@ namespace OneShoot.Addin.Digu
                 case Timeline.Friends:
                     {
                         url = string.Format(ApiUrl + "statuses/friends_timeline.json?id={0}&count={1}&since_id={2}&page={3}",
-                            userId, 20, since, 1);
+                            userId, 20, 0, 1);
                     }
                     break;
                 case Timeline.User:
                     {
                         url = string.Format(ApiUrl + "statuses/user_timeline.json?id={0}&count={1}&since_id={2}&page={3}",
-                            userId, 20, since, 1);
+                            userId, 20, 0, 1);
                     }
                     break;
                 case Timeline.Public:
@@ -63,7 +63,7 @@ namespace OneShoot.Addin.Digu
                 case Timeline.Replies:
                     {
                         url = string.Format(ApiUrl + "statuses/replies.json?count={1}&since_id={2}&page={3}",
-                            20, since, 1);
+                            20, 0, 1);
                     }
                     break;
             }
@@ -73,6 +73,9 @@ namespace OneShoot.Addin.Digu
                 tc.Add(tweets[i].toITweet());
             return tc;
         }
+
+        public ITweet Update(string text, string replyid, string source) { return null; }
+        public void Destroy(string id) { }
 
         /// <summary>
         /// 获取
