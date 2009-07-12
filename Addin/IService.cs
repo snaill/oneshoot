@@ -17,7 +17,7 @@ namespace OneShoot.Addin
     {
         string UserName { get; set; }
         string Password { get; set; }
-        System.Net.IWebProxy WebProxy { get; set; }
+ //       System.Net.IWebProxy WebProxy { get; set; }
 
         bool VerifyAccount(string userName, string password );
 
