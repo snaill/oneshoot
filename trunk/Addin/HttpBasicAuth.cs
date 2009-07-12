@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
-using System.ServiceModel.Web;
 
 namespace OneShoot.Addin
 {
@@ -15,7 +14,7 @@ namespace OneShoot.Addin
             Service = service;
         }
 
-        public System.Net.IWebProxy WebProxy { get; set; }
+ //       public System.Net.IWebProxy WebProxy { get; set; }
 
         public string UserName { get; set; }
         public string Password { get; set; }
@@ -35,7 +34,7 @@ namespace OneShoot.Addin
                 myCache.Add(new Uri(url.ToString()), "Basic", new System.Net.NetworkCredential(UserName, Password));
                 req.Credentials = myCache;
                 req.Method = "GET";
-                req.Proxy = WebProxy;
+        //        req.Proxy = WebProxy;
 
                 return req.GetResponse();
 
@@ -55,7 +54,7 @@ namespace OneShoot.Addin
                 myCache.Add(new Uri(url.HostAndPath), "Basic", new System.Net.NetworkCredential(UserName, Password));
                 req.Credentials = myCache;
                 req.Method = "POST";
-                req.Proxy = WebProxy;
+         //       req.Proxy = WebProxy;
 
                 string param = url.Query;
                 req.ContentType = "application/x-www-form-urlencoded";

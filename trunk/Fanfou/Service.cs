@@ -19,7 +19,7 @@ namespace OneShoot.Addin.Fanfou
         protected HttpBasicAuth Auth = new HttpBasicAuth("fanfou.com");
         protected const int MaxCountOnePage = 20;
  
-		public System.Net.IWebProxy WebProxy { get { return Auth.WebProxy; } set { Auth.WebProxy = value; } }
+	//	public System.Net.IWebProxy WebProxy { get { return Auth.WebProxy; } set { Auth.WebProxy = value; } }
         public string UserName { get { return Auth.UserName; } set { Auth.UserName = value; } }
         public string Password { get { return Auth.Password; } set { Auth.Password = value; } }
         public bool VerifyAccount(string userName, string password)
