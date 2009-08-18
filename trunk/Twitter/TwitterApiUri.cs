@@ -14,7 +14,8 @@ namespace OneShoot.Addin.Twitter
         public TwitterApiUri()
         {
             this.Scheme = "http";
-            this.Host = "twitter.com";
+//            this.Host = "twitter.com";
+            this.Host = "tweetproxy.appspot.com/api";
         }
 
         #region 账户相关

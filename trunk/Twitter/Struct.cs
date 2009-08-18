@@ -46,7 +46,7 @@ namespace OneShoot.Addin.Twitter
         [DataMember(Name = "user")]
         public User user { get; set; }
 
-        public ITweet toITweet()
+        public ITweet toITweet(IAuth auth)
         {
             ITweet tweet = new ITweet();
             tweet.Id = id;
@@ -59,6 +59,7 @@ namespace OneShoot.Addin.Twitter
             tweet.Source = source;
             tweet.Text = text;
             tweet.User = user.toIUser();
+            tweet.Auth = auth;
 
             return tweet;
         }
