@@ -14,20 +14,23 @@ namespace OneShoot.Addin.Twitter
     /// </summary>
     public class Service : OneShoot.Addin.IService
     {
-        public const string ApiUrl = "http://twitter.com/";
-        public System.Net.IWebProxy WebProxy { get; set; }
-
-        public string UserName { get; set; }
-        public string Password { get; set; }
-
-        public const int MaxCountOnePage = 200;
-
+        protected HttpBasicAuth Auth = new HttpBasicAuth("twitter.com");
+        protected const int MaxCountOnePage = 200;
+ 
+	//	public System.Net.IWebProxy WebProxy { get { return Auth.WebProxy; } set { Auth.WebProxy = value; } }
+        public string UserName { get { return Auth.UserName; } set { Auth.UserName = value; } }
+        public string Password { get { return Auth.Password; } set { Auth.Password = value; } }
         public bool VerifyAccount(string userName, string password)
         {
             try
             {
+                HttpBasicAuth auth = new HttpBasicAuth("twitter.com");
+                auth.UserName = userName;
+                auth.Password = password;
 
-                GetResponse(ApiUrl + "account/verify_credentials.json", userName, password);
+                TwitterApiUri uri = new TwitterApiUri();
+                uri.verify_credentials();
+                auth.Get(uri);
             }
             catch (Exception)
             {
@@ -37,73 +40,56 @@ namespace OneShoot.Addin.Twitter
             return true;
         }
 
-        public TweetCollection GetTimeline(Timeline tl, string userId, int max)
+        public TweetCollection GetTimeline( Timeline tl, string userId, int max )
         {
-            string url = "";
+            TwitterApiUri uri = new TwitterApiUri();
             switch (tl)
             {
                 case Timeline.Friends:
-                    {
-                        url = string.Format(ApiUrl + "statuses/friends_timeline.json?count={0}&page={1}",
-                            20, 1);
-                    }
+                    uri.friends_timeline(20, null, null, 1);
                     break;
                 case Timeline.User:
-                    {
-                        url = string.Format(ApiUrl + "statuses/user_timeline.json?id={0}&count={1}&since_id={2}&page={3}",
-                            userId, 20, 0, 1);
-                    }
+                    uri.user_timeline(20, null, null, 1);
                     break;
                 case Timeline.Public:
-                    {
-                        url = string.Format(ApiUrl + "statuses/public_timeline.json?count={0}", 20);
-                    }
+                    uri.public_timeline(20);
                     break;
                 case Timeline.Replies:
-                    {
-                        url = string.Format(ApiUrl + "statuses/replies.json?count={1}&since_id={2}&page={3}",
-                            20, 0, 1);
-                    }
+                    uri.replies(20, null, null, 1);
                     break;
             }
-            Tweet[] tweets = GetResponseObject<Tweet[]>(url);
+
+            Tweet[] tweets = ApiGet<Tweet[]>( uri );
             TweetCollection tc = new TweetCollection();
             for (int i = 0; i < tweets.Length; i++)
-                tc.Add(tweets[i].toITweet());
+                tc.Add(tweets[i].toITweet( Auth ));
             return tc;
         }
 
-        public ITweet Update(string text, string replyid, string source) { return null; }
-        public void Destroy(string id) { }
-
-        /// <summary>
-        /// 获取
-        /// </summary>
-        /// <param name="url"></param>
-        /// <returns></returns>
-        protected System.Net.WebResponse GetResponse(string url, string userName, string password)
+        public ITweet Update(string text, string replyid, string source) 
         {
-            try
-            {
-                System.Net.WebRequest req = System.Net.WebRequest.Create(url);
-                System.Net.CredentialCache myCache = new System.Net.CredentialCache();
-                myCache.Add(new Uri(url), "Basic", new System.Net.NetworkCredential(userName, password));
-                req.Credentials = myCache;
-                req.Method = "GET";
-                req.Proxy = WebProxy;
-
-                return req.GetResponse();
-
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            TwitterApiUri uri = new TwitterApiUri();
+            uri.update(text, replyid, source);
+            return ApiPost<Tweet>(uri).toITweet(Auth);
         }
 
-        protected T GetResponseObject<T>(string url)
+        public void Destroy(string id) {
+            TwitterApiUri uri = new TwitterApiUri();
+            uri.destroy(id);
+            ApiPost<Tweet>(uri);
+        }
+
+        protected T ApiGet<T>(Url url)
         {
-            System.Net.WebResponse resp = GetResponse(url, UserName, Password);
+            System.Net.WebResponse resp = Auth.Get(url);
+            System.IO.Stream stream = resp.GetResponseStream();
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(T));
+            return (T)serializer.ReadObject(stream);
+        }
+
+        protected T ApiPost<T>(Url url)
+        {
+            System.Net.WebResponse resp = Auth.Post(url);
             System.IO.Stream stream = resp.GetResponseStream();
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(T));
             return (T)serializer.ReadObject(stream);
