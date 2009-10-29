@@ -5,7 +5,7 @@ using System.Text;
 using System.Xml.Linq;
 using OneShoot.Addin;
 
-namespace OneShoot
+namespace OneShoot.Addin
 {
     public class AddinInfo
     {
@@ -17,11 +17,11 @@ namespace OneShoot
 
     public class AddinManager : List<AddinInfo>
     {
-        public void Init()
+        public void Load(string fn)
         {
             try
             {
-                XDocument config = XDocument.Load( Manager.AddinFile);
+                XDocument config = XDocument.Load( fn );
                 var accs = from acc in config.Root.Element("Twitter").Elements()
                            select new AddinInfo
                            {
@@ -33,7 +33,6 @@ namespace OneShoot
 
                 if (null != accs)
                     AddRange(accs);
-
             }
             catch (Exception)
             {
