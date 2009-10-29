@@ -35,5 +35,9 @@ namespace OneShoot
             Manager.RefreshThread.Abort();
         }
 
+        private void SettingSaveButton_Click(object sender, RoutedEventArgs e)
+        {
+        	
+        }
 	}
 }
