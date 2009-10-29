@@ -7,7 +7,7 @@ using System.Collections.Specialized;
 using System.Collections.ObjectModel;
 using OneShoot.Addin;
 
-namespace OneShoot
+namespace OneShoot.Addin
 {
     public class AccountInfo
     {
@@ -16,38 +16,19 @@ namespace OneShoot
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Type { get; set; }
-        public AddinInfo Addin
-        {
-            get
-            {
-                return Manager.AddinManager.GetAddinInfo(Type);
-            }
-        }
-        public IService Service 
-        { 
-            get {
-                if (service == null)
-                {
-                    service = Manager.AddinManager.CreateService(Type);
-                    if (null != service)
-                    {
-                        service.UserName = UserName;
-                        service.Password = Password;
-                    }
-                }
-
-                return service;
-            }
-        }
+        public bool IsValid { get; set; }
+        public IService Service { get; set; }
     }
 
     public class AccountManager : ObservableCollection<AccountInfo>
     {
-        public void Init()
+    	string _fn = "";
+    	
+        public void Load( string fn, AddinManager addins )
         {
             try
             {
-                XDocument xml = XDocument.Load( Manager.AccountFile );
+                XDocument xml = XDocument.Load( fn );
                 var accs = from acc in xml.Root.Elements()
                            select new AccountInfo
                            {
@@ -58,7 +39,15 @@ namespace OneShoot
 
                AccountInfo[] ais = accs.ToArray();
                for (int i = 0; i < ais.Length; i++)
-                   base.Add(ais[i]);
+               {
+               		ais[i].Service = addins.CreateService(ais[i].Type);
+               		if ( ais[i].Service == null )
+               			continue; 
+               		
+               		ais[i].IsValid = ais[i].Service.VerifyAccount( ais[i].UserName, ais[i].Password );
+               		base.Add(ais[i]);
+               }
+               _fn = fn;
             }
             catch (Exception)
             {
@@ -80,17 +69,14 @@ namespace OneShoot
             base.Add(acc);
 
             // save
-            XDocument xml = XDocument.Load( Manager.AccountFile );
+            XDocument xml = XDocument.Load( _fn );
             XElement accElem = new XElement(
                 "Account",
                 new XAttribute("userName", acc.UserName),
                 new XAttribute("password", Encode(acc.Password)),
                 new XAttribute("type", acc.Type));
             xml.Root.Add( accElem );
-            xml.Save( Manager.AccountFile );
-
-            //
-            Manager.nRefreshTick = 0;
+            xml.Save( _fn );
         }
 
         public new void Remove(AccountInfo acc)
@@ -99,17 +85,14 @@ namespace OneShoot
             base.Remove(acc);
 
             // save
-            XDocument xml = XDocument.Load( Manager.AccountFile );
+            XDocument xml = XDocument.Load( _fn );
             var accElem = from p in xml.Root.Elements()
                           where p.Attribute("userName").Value == acc.UserName && p.Attribute("type").Value == acc.Type
                           select p;
             accElem.Remove();
 
             // 保存xml
-            xml.Save(Manager.AccountFile);
-
-            //
-            Manager.nRefreshTick = 0;
+            xml.Save( _fn );
         }
 
         protected string Encode(string code)

@@ -14,34 +14,37 @@ namespace OneShoot
         public static System.Threading.Thread RefreshThread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(Manager.Refresh));
         public static int nRefreshTick = 0;
 
-        public static AccountManager _accountManager = null;
-        public static AddinManager _addinManager = null;
+		public static OneShoot.Addin.TweetService _service = null;
         public static OneShoot.Addin.TweetCollection _tweets = null;
-
-        public static AccountManager AccountManager { 
-            get 
-            {
-                if (null == _accountManager)
-                {
-                    _accountManager = new AccountManager();
-                    _accountManager.Init();
-                }
-                return _accountManager;
-            }
-        }
-        public static AddinManager AddinManager
+        
+        public static OneShoot.Addin.AddinManager AddinManager
         {
             get
             {
-                if (null == _addinManager)
-                {
-                    _addinManager = new AddinManager();
-                    _addinManager.Init();
-                }
-                return _addinManager;
+    	        return Service.AddinMgr;
             }
         }
-
+            
+        public static OneShoot.Addin.AccountManager AccountManager
+        {
+            get
+            {
+    	        return Service.AccountMgr;
+            }
+        }    
+            
+        public static OneShoot.Addin.TweetService Service
+        {
+            get
+            {
+                if (null == _service)
+                {
+                    _service = new OneShoot.Addin.TweetService(AddinFile, AccountFile);
+                }
+                return _service;
+            }
+        }
+        
         public static OneShoot.Addin.TweetCollection Tweets
         {
             get
@@ -66,15 +69,8 @@ namespace OneShoot
             {
                 if (0 >= Manager.nRefreshTick)
                 {
-                    for (int i = 0; i < AccountManager.Count; i++)
-                    {
-                        OneShoot.Addin.IService service = AccountManager[i].Service;
-                        if (null == service)
-                            continue;
-
-                        OneShoot.Addin.TweetCollection tc = service.GetTimeline(OneShoot.Addin.Timeline.Friends, AccountManager[i].UserName, Parameters.MaxCountOnScreen);
-                        (obj as System.Windows.Threading.Dispatcher).Invoke(new Action<OneShoot.Addin.TweetCollection>(AddNewTweets), tc);
-                    }
+                	OneShoot.Addin.TweetCollection tc = Service.GetTimeline( OneShoot.Addin.Timeline.Friends, Parameters.MaxCountOnScreen );
+                    (obj as System.Windows.Threading.Dispatcher).Invoke(new Action<OneShoot.Addin.TweetCollection>(AddNewTweets), tc);
 
                     Manager.nRefreshTick = Parameters.RefreshTick;
                 }
